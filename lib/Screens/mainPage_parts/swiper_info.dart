@@ -1,0 +1,82 @@
+import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
+import 'package:umeals/domain/types/swiperInfo.dart';
+
+class SwiperInfo extends StatelessWidget {
+  final List<InfoSwiper> infoSwiper;
+  const SwiperInfo({super.key, required this.infoSwiper});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 210,
+      width: double.infinity,
+      child: Swiper(
+        viewportFraction: 0.8,
+        scale: 0.9,
+        autoplay: true,
+
+        //los botones
+        pagination: SwiperPagination(
+          margin: const EdgeInsets.only(top:0),
+          builder: DotSwiperPaginationBuilder(
+            activeColor: colors.primary,
+            color: colors.secondary
+
+          )
+        ),
+        itemCount: infoSwiper.length,
+        itemBuilder: (context,index){
+          final empInfo = infoSwiper[index];
+        return _SlideImage(info: empInfo);
+        },
+      ),
+    );
+  }
+}
+
+class _SlideImage extends StatelessWidget {
+  final InfoSwiper info;
+  const _SlideImage({super.key, required this.info});
+
+  @override
+  Widget build(BuildContext context) {
+     final decoration = BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+          BoxShadow(
+          color: Colors.black45,
+          blurRadius: 10,
+          offset: Offset(0,10)
+        )
+      ]
+    );
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30), 
+      child: DecoratedBox(
+        decoration: decoration,
+        //lo usamos para poder meter el borderRadius
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          //ponemos la imagen
+          child: Image.network(
+            info.imagePath,
+            fit: BoxFit.cover,
+            //esto es mientras carga muestre tal cosa
+            loadingBuilder: (context, child, loadingProgress){
+              if( loadingProgress != null){
+                  return const DecoratedBox(
+                    decoration: BoxDecoration(color: Colors.black12)
+                    );
+              
+            }
+            return child;
+            }
+          )
+          )
+          ),
+      );
+  }
+}
