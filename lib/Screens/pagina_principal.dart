@@ -1,11 +1,47 @@
-import 'package:flutter/widgets.dart';
-import 'package:umeals/Screens/mainPage_parts/swiper_info.dart';
+import 'package:flutter/material.dart';
+
+import 'mainPage_parts/exports.dart';
+
 
 class PaginaPrincipal extends StatelessWidget {
   const PaginaPrincipal({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SwiperInfo();
+    return const Scaffold(
+      body: _HomeViews(),
+      bottomNavigationBar: Customnavbutton(),
+    );
+  }
+}
+
+class _HomeViews extends StatelessWidget {
+  const _HomeViews();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          title: AppBarMain(),
+          
+        ),
+ 
+          
+             SliverToBoxAdapter(
+               child: Column(
+                  children: [
+                    const SizedBox(height: 10,),
+                    SwiperInfo()
+                  ],
+                ),
+             )
+      ]
+            
+        
+
+    );
+    
   }
 }
