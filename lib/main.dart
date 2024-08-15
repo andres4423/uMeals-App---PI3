@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:umeals/Screens/pagina_principal.dart';
 import 'package:umeals/config/Theme/appTheme.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
       home: const Scaffold(
-        body: Text("Demo")
+        body: PaginaPrincipal()
       ),
     );
   }
