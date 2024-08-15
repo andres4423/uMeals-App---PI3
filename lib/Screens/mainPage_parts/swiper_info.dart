@@ -16,7 +16,7 @@ class SwiperInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return SizedBox(
-      height: 210,
+      height: 155,
       width: double.infinity,
       child: Swiper(
         viewportFraction: 0.8,
