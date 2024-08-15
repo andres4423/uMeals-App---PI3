@@ -22,10 +22,8 @@ class _HomeViews extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
-          floating: true,
-          title: AppBarMain(),
-          
+        const SliverToBoxAdapter(
+          child: AppBarMain(),
         ),
  
           

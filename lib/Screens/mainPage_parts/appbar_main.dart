@@ -11,7 +11,7 @@ class AppBarMain extends StatelessWidget {
         child: Center(
           child: Image.asset(
             'assets/logoUmeals.png',
-            height: 50,
+            height: 80,
           )
         ),
       ),
