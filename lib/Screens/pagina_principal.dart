@@ -31,7 +31,8 @@ class _HomeViews extends StatelessWidget {
                child: Column(
                   children: [
                     const SizedBox(height: 10,),
-                    SwiperInfo()
+                    SwiperInfo(),
+                    const Divider(thickness: 1, color: Colors.black,)
                   ],
                 ),
              )
