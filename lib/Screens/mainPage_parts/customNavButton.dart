@@ -31,7 +31,11 @@ class Customnavbutton extends StatelessWidget {
             label: 'Profile'
 
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.message_outlined, color: Colors.black45,), label: '',),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.message_outlined, 
+                color: Colors.black45,)
+                , label: '',),
             BottomNavigationBarItem(icon: Icon(Icons.home_outlined, color: Colors.black45), label: 'home'),
             // BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined, color: Colors.black45), label: 'carrito_compras'),
             BottomNavigationBarItem(icon: Icon(Icons.settings, color: Colors.black45), label: 'settings'),
