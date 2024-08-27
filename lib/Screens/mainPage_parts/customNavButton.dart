@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 
 class Customnavbutton extends StatelessWidget {
@@ -6,6 +7,22 @@ class Customnavbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     void onItemTapped(BuildContext context, int index){
+    switch(index){
+      case 0:
+        context.go('/cuenta');
+        break;
+        case 1:
+        context.go('/');
+        break;
+        case 2:
+        context.go('/');
+        break;
+    }
+  }
+
+
      final colors = Theme.of(context).colorScheme;
     return ClipRRect(
       borderRadius: const BorderRadius.only(
@@ -23,12 +40,18 @@ class Customnavbutton extends StatelessWidget {
         unselectedFontSize: 18,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        onTap: (index) => onItemTapped(context, index),
+
+
+
         items:const [
             BottomNavigationBarItem(icon: CircleAvatar(
               radius: 14,
               backgroundImage: NetworkImage('https://www.google.com/imgres?q=circle%20avatar&imgurl=https%3A%2F%2Fcdn.icon-icons.com%2Ficons2%2F1919%2FPNG%2F512%2Favatarinsideacircle_122011.png&imgrefurl=https%3A%2F%2Ficon-icons.com%2Fes%2Ficono%2Favatar-dentro-c%25C3%25ADrculo%2F122011&docid=ULyUz0SpFVaUjM&tbnid=F-2xWyhSusw1KM&vet=12ahUKEwj-oYisq_eHAxWdTDABHbOfNsgQM3oECBYQAA..i&w=512&h=512&hcb=2&ved=2ahUKEwj-oYisq_eHAxWdTDABHbOfNsgQM3oECBYQAA'),
+              
             ),
-            label: 'Profile'
+            label: 'Profile',
+            
 
             ),
             BottomNavigationBarItem(

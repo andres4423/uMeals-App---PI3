@@ -6,18 +6,18 @@ final AppRouter = GoRouter(
   
 //* Para pasar id es así:
 routes: [
+  
 GoRoute(
 path: '/',
 builder: (context, state) => const PaginaPrincipal(),
 ),
 //     esto para evitar q si recarga pierda flecha de refreso
 GoRoute(
-path: '/cuenta',
-builder: (context, state){
-//final movieId = state.pathParameters['id'] ?? 'no id';
-
-
-
+  path: '/cuenta',
+  builder: (context, state){
+    return const MiCuenta();
+  }
+)
 ]
 );
 
