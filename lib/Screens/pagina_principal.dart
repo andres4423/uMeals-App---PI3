@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umeals/Screens/mainPage_parts/store_grid.dart';
 
 import 'mainPage_parts/exports.dart';
 
@@ -32,7 +33,8 @@ class _HomeViews extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10,),
                     SwiperInfo(),
-                    const Divider(thickness: 1, color: Colors.black,)
+                    const Divider(thickness: 1, color: Colors.black,),
+                    const BusinessGrid()
                   ],
                 ),
              )
