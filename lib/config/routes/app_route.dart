@@ -6,10 +6,13 @@ import 'package:go_router/go_router.dart';
 
   
   //*Ejemplo de como se usa, solo para pasar de pantalla a pantalla
+  //GoRoute(
 //    path: '/',
 //   builder: (context, state) => const HomeScreen(),
 //   );
 
+
+//context.go('path');
 //* Para pasar id es así:
 
 // GoRoute(

@@ -12,6 +12,7 @@ class AppBarMain extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 5,),
             Image.asset(
               'assets/logoUmeals.png',
               height: 50,
