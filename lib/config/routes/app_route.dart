@@ -16,10 +16,6 @@ path: '/cuenta',
 builder: (context, state){
 //final movieId = state.pathParameters['id'] ?? 'no id';
 
-return  const MiCuenta();
-}
-),
-
 
 
 ]
