@@ -68,21 +68,14 @@ class MiCuenta extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Spacer(flex: 1),
-                          Image.asset(
-                            'assets/mano.jpeg',
-                          ),
-                          const Spacer(flex: 1), 
-                        ],
-                      ),
                     ],
                   ),
-                )
-
+                ),
+                const SizedBox(width: 16),
+                Image.asset(
+                  'assets/mano.jpeg',
+                  width: 140, // Ajusta el tamaño de la imagen según sea necesario
+                ),
               ],
             ),
             const SizedBox(height: 20),
