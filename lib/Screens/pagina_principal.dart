@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umeals/Screens/mainPage_parts/store_grid.dart';
-
+import 'package:umeals/services/business_api.dart';
 import 'mainPage_parts/exports.dart';
 
 
@@ -35,7 +34,7 @@ class _HomeViews extends StatelessWidget {
                     const SizedBox(height: 10,),
                     SwiperInfo(),
                     const Divider(thickness: 1, color: Colors.black,),
-                    const BusinessGrid()
+                    const BusinessPage()
                   ],
                 ),
              )

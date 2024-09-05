@@ -33,6 +33,8 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^14.2.3
+  http: ^1.2.2
+  palette_generator: ^0.3.3+4
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -50,15 +52,6 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/cachi.jpeg
-    - assets/mano.jpeg
-    - assets/UMEALSXUPB.jpeg
-    - assets/logoUmeals.png
-    - assets/logoUPB.png
-    - assets/resturante1.png
-    - assets/resturante2.png
-    - assets/resturante3.png
-    - assets/resturante4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

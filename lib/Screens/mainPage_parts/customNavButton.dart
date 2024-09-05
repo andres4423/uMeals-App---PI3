@@ -14,7 +14,7 @@ class Customnavbutton extends StatelessWidget {
         context.go('/cuenta');
         break;
         case 1:
-        context.go('/');
+        context.go('/inicio');
         break;
         case 2:
         context.go('/');
