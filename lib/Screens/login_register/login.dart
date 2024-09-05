@@ -1,11 +1,57 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:umeals/Screens/pagina_principal.dart';
 import 'register.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+class LoginScreen extends StatefulWidget {
 
-class LoginScreen extends StatelessWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+    final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+   bool response = false;
+  Future<void> login() async {
+   
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'correo': emailController.text, 
+          'password': passwordController.text,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print('Inicio de sesión exitoso: ${data['message']}');
+         Navigator.push(context, 
+        MaterialPageRoute(builder: (context) => const PaginaPrincipal()));  
+       
+        
+      } else {
+        final error = jsonDecode(response.body)['message'] ?? 'Error desconocido';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $error')),
+        );
+      }
+    } catch (e) {
+  print('Error de red: ${e.toString()}');
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Error al conectar con el servidor: ${e.toString()}')),
+  );
+}
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -47,7 +93,9 @@ class LoginScreen extends StatelessWidget {
                   labelText: 'Correo electrónico',
                   hintText: 'Ingrese su correo institucional',
                   border: OutlineInputBorder(),
+                  
                 ),
+                controller: emailController,
               ),
               SizedBox(height: 16),
               TextField(
@@ -57,10 +105,11 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Ingrese su contraseña',
                   border: OutlineInputBorder(),
                 ),
+                controller:passwordController ,
               ),
               SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: login,
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                   backgroundColor: Colors.red,

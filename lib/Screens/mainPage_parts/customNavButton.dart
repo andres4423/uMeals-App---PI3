@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
+import 'package:umeals/Screens/mi_cuenta.dart';
 
 class Customnavbutton extends StatelessWidget {
   const Customnavbutton({super.key});
@@ -11,13 +10,16 @@ class Customnavbutton extends StatelessWidget {
      void onItemTapped(BuildContext context, int index){
     switch(index){
       case 0:
-        context.go('/cuenta');
+        Navigator.push(context, 
+        MaterialPageRoute(builder: (context) => const MiCuenta()));  
         break;
         case 1:
-        context.go('/inicio');
+         Navigator.push(context, 
+        MaterialPageRoute(builder: (context) => const MiCuenta()));  
         break;
         case 2:
-        context.go('/');
+         Navigator.push(context, 
+        MaterialPageRoute(builder: (context) => const MiCuenta()));  
         break;
     }
   }
@@ -31,7 +33,7 @@ class Customnavbutton extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         elevation: 5,
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.white30,
         selectedItemColor: colors.primary,
         unselectedItemColor: Colors.black87,
         type: BottomNavigationBarType.fixed,
