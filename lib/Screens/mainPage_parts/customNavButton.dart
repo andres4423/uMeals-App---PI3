@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umeals/Screens/mi_cuenta.dart';
+import 'package:umeals/Screens/profile/mi_cuenta.dart';
 
 class Customnavbutton extends StatelessWidget {
   const Customnavbutton({super.key});
@@ -33,9 +33,9 @@ class Customnavbutton extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         elevation: 5,
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         selectedItemColor: colors.primary,
-        unselectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         iconSize: 40,
         selectedFontSize: 20,
