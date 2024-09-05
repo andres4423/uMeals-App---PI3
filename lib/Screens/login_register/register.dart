@@ -1,8 +1,20 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
-import 'package:flutter/material.dart';
-import 'login.dart'; 
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_build_context_synchronously
 
-class RegisterScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:umeals/services/register_service.dart';
+
+
+
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +54,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               SizedBox(height: 40),
               TextField(
+                controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Nombre Completo',
                   hintText: 'Ingrese sus nombres y apellidos',
@@ -50,6 +63,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               SizedBox(height: 16),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Correo electrónico',
                   hintText: 'Ingrese su correo institucional',
@@ -58,6 +72,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               SizedBox(height: 16), 
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Contraseña',
@@ -67,7 +82,14 @@ class RegisterScreen extends StatelessWidget {
               ),
               SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: (){
+                  RegisterService(
+                    context: context,
+                    nameController: nameController,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                  ).register();
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                   backgroundColor: Colors.red,

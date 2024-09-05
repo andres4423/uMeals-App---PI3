@@ -1,11 +1,24 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:umeals/services/login_service.dart';
 import 'register.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+    final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+   bool response = false;
+   
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -47,7 +60,9 @@ class LoginScreen extends StatelessWidget {
                   labelText: 'Correo electrónico',
                   hintText: 'Ingrese su correo institucional',
                   border: OutlineInputBorder(),
+                  
                 ),
+                controller: emailController,
               ),
               SizedBox(height: 16),
               TextField(
@@ -57,10 +72,17 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Ingrese su contraseña',
                   border: OutlineInputBorder(),
                 ),
+                controller:passwordController ,
               ),
               SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: ()
+                {AuthService(
+                     context: context,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ).login();
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                   backgroundColor: Colors.red,
