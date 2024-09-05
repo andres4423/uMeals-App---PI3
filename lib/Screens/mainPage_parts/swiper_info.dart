@@ -4,10 +4,10 @@ import 'package:umeals/domain/types/swiperInfo.dart';
 
 class SwiperInfo extends StatelessWidget {
   final List<InfoSwiper> infoSwiper =[
-    InfoSwiper(imagePath: 'https://www.google.com/imgres?q=aburrimiento%20inside%20out%202&imgurl=https%3A%2F%2Fstatic.wikia.nocookie.net%2Finside-out%2Fimages%2Fc%2Fcb%2FEnnui_inside_out_2_profile.png%2Frevision%2Flatest%3Fcb%3D20240625234449%26path-prefix%3Des&imgrefurl=https%3A%2F%2Finside-out.fandom.com%2Fes%2Fwiki%2FEnnui&docid=XMGlZO-y_hDpBM&tbnid=upfa1tDIfVnM0M&vet=12ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA..i&w=827&h=1247&hcb=2&ved=2ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA'),
-    InfoSwiper(imagePath: 'https://www.google.com/imgres?q=aburrimiento%20inside%20out%202&imgurl=https%3A%2F%2Fstatic.wikia.nocookie.net%2Finside-out%2Fimages%2Fc%2Fcb%2FEnnui_inside_out_2_profile.png%2Frevision%2Flatest%3Fcb%3D20240625234449%26path-prefix%3Des&imgrefurl=https%3A%2F%2Finside-out.fandom.com%2Fes%2Fwiki%2FEnnui&docid=XMGlZO-y_hDpBM&tbnid=upfa1tDIfVnM0M&vet=12ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA..i&w=827&h=1247&hcb=2&ved=2ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA'),
-    InfoSwiper(imagePath: 'https://www.google.com/imgres?q=aburrimiento%20inside%20out%202&imgurl=https%3A%2F%2Fstatic.wikia.nocookie.net%2Finside-out%2Fimages%2Fc%2Fcb%2FEnnui_inside_out_2_profile.png%2Frevision%2Flatest%3Fcb%3D20240625234449%26path-prefix%3Des&imgrefurl=https%3A%2F%2Finside-out.fandom.com%2Fes%2Fwiki%2FEnnui&docid=XMGlZO-y_hDpBM&tbnid=upfa1tDIfVnM0M&vet=12ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA..i&w=827&h=1247&hcb=2&ved=2ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA'),
-    InfoSwiper(imagePath: 'https://www.google.com/imgres?q=aburrimiento%20inside%20out%202&imgurl=https%3A%2F%2Fstatic.wikia.nocookie.net%2Finside-out%2Fimages%2Fc%2Fcb%2FEnnui_inside_out_2_profile.png%2Frevision%2Flatest%3Fcb%3D20240625234449%26path-prefix%3Des&imgrefurl=https%3A%2F%2Finside-out.fandom.com%2Fes%2Fwiki%2FEnnui&docid=XMGlZO-y_hDpBM&tbnid=upfa1tDIfVnM0M&vet=12ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA..i&w=827&h=1247&hcb=2&ved=2ahUKEwjF6-2j0fSHAxVfSjABHZrrA7QQM3oECBgQAA')
+    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
+    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
+    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
+    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
 
   ];
    SwiperInfo({super.key});
