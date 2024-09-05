@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_build_context_synchronously
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:umeals/services/register_service.dart';
+
 
 
 class RegisterScreen extends StatefulWidget {
@@ -15,41 +15,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> register() async {
-    try {
-      final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/register'),  
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'Nombre': nameController.text,
-          'correo': emailController.text, 
-          'password': passwordController.text,
-        }),
-      );
-
-      if (response.statusCode == 201) {
-        print('Usuario registrado exitosamente');
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Registro exitoso')),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
-      } else {
-        final error = jsonDecode(response.body)['message'] ?? 'Error desconocido';
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $error')),
-        );
-      }
-    } catch (e) {
-      print('Error de red: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al conectar con el servidor')),
-      );
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +82,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 40),
               ElevatedButton(
-                onPressed: register,
+                onPressed: (){
+                  RegisterService(
+                    context: context,
+                    nameController: nameController,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                  ).register();
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                   backgroundColor: Colors.red,
