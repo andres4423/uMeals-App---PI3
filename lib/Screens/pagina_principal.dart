@@ -10,7 +10,9 @@ class PaginaPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return const Scaffold(
-      body: _HomeViews(),
+      body: SafeArea(
+        child: _HomeViews()
+        ),
       bottomNavigationBar: Customnavbutton(),
     );
   }
