@@ -12,7 +12,7 @@ class BusinessModel {
   late final String nombre;
   late final String descripcion;
   late final String portadaImgURL;
-  late final int rating;
+  late final String rating;
   late final int estado;
   late final String logotipoImgUrl;
 
@@ -21,7 +21,7 @@ class BusinessModel {
     nombre = json['Nombre'];
     descripcion = json['Descripcion'];
     portadaImgURL = json['portada_img_URL'];
-    rating = json['RESENAS_RATED_idRESENAS_RATED'];
+    rating = json['Calificacion'];
     estado = json['Estado'];
     logotipoImgUrl = json['logotipo_img_url'];
   }
@@ -32,7 +32,7 @@ class BusinessModel {
     data['Nombre'] = nombre;
     data['Descripcion'] = descripcion;
     data['portada_img_URL'] = portadaImgURL;
-    data['RESENAS_RATED_idRESENAS_RATED'] = rating;
+    data['Calificacion'] = rating;
     data['Estado'] = estado;
     data['logotipo_img_url'] = logotipoImgUrl;
     return data;

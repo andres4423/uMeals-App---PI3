@@ -3,4 +3,12 @@ class InfoSwiper{
 
   InfoSwiper({required this.imagePath});
   
+    factory InfoSwiper.fromMap(Map<String, dynamic> map) {
+    return InfoSwiper(
+      imagePath: map['ImgPath'] ?? '', 
+    );
+  }
+ 
+
 }
+
