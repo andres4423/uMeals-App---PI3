@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umeals/services/business_api.dart';
+import 'package:umeals/services/carrusel_api.dart';
 import 'mainPage_parts/exports.dart';
 
 
@@ -34,7 +35,8 @@ class _HomeViews extends StatelessWidget {
                child: Column(
                   children: [
                     const SizedBox(height: 10,),
-                    SwiperInfo(),
+                    // SwiperInfo(),
+                    const CarruselApi(),
                     const Divider(thickness: 1, color: Colors.black,),
                     const BusinessPage()
                   ],

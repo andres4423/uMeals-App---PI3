@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:umeals/Screens/login_register/login.dart';
+import 'package:umeals/Screens/pagina_principal.dart';
 import 'package:umeals/config/Theme/appTheme.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
-        home: LoginScreen(),    
+        home: PaginaPrincipal(),    
     );
   }
 }

@@ -3,14 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:umeals/domain/types/swiperInfo.dart';
 
 class SwiperInfo extends StatelessWidget {
-  final List<InfoSwiper> infoSwiper =[
-    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
-    InfoSwiper(imagePath: 'https://drive.usercontent.google.com/download?id=1aAfY7-U9b7_oqsU62qy54MxcaetMDWv7&export=view&authuser=0'),
-    InfoSwiper(imagePath: 'https://cdn.prod.website-files.com/6423e8cf97045d0ac6e9ffb9/6565d9491a89f4b7b7915b3e_tipos%20de%20restaurante.jpg'),
-    InfoSwiper(imagePath: 'https://drive.usercontent.google.com/download?id=1aAfY7-U9b7_oqsU62qy54MxcaetMDWv7&export=view&authuser=0'),
-
-  ];
-   SwiperInfo({super.key});
+  final List<InfoSwiper> infoSwiper;
+   SwiperInfo({super.key, this.infoSwiper = const []});
 
   @override
   Widget build(BuildContext context) {
