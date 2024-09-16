@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -74,7 +76,7 @@ class MiCuenta extends StatelessWidget {
                 const SizedBox(width: 16),
                 Image.asset(
                   'assets/mano.jpeg',
-                  width: 140, // Ajusta el tamaño de la imagen según sea necesario
+                  width: 140,
                 ),
               ],
             ),
@@ -83,7 +85,9 @@ class MiCuenta extends StatelessWidget {
               leading: const Icon(Icons.edit),
               title: const Text('Editar perfil'),
               trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
+              onTap: () {
+                context.go('/editar_cuenta');
+              },
             ),
             ListTile(
               leading: const Icon(Icons.message),
