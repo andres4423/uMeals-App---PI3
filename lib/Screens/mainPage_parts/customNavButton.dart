@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umeals/Screens/profile/mi_cuenta.dart';
+import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 
 class Customnavbutton extends StatelessWidget {
   const Customnavbutton({super.key});
