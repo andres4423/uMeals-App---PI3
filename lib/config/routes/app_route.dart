@@ -14,7 +14,7 @@ GoRoute(
 path: '/',
 builder: (context, state) => const PaginaPrincipal(),
 ),
-//     esto para evitar q si recarga pierda flecha de refreso
+
 GoRoute(
   path: '/cuenta',
   builder: (context, state){
