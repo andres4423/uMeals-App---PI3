@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:umeals/Screens/mi_cuenta/editar.dart';
 
 class MiCuenta extends StatelessWidget {
   const MiCuenta({super.key});
@@ -74,7 +75,7 @@ class MiCuenta extends StatelessWidget {
                 const SizedBox(width: 16),
                 Image.asset(
                   'assets/mano.jpeg',
-                  width: 140, // Ajusta el tamaño de la imagen según sea necesario
+                  width: 140, 
                 ),
               ],
             ),
@@ -83,7 +84,9 @@ class MiCuenta extends StatelessWidget {
               leading: const Icon(Icons.edit),
               title: const Text('Editar perfil'),
               trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const Editar_cuenta())); 
+              },
             ),
             ListTile(
               leading: const Icon(Icons.message),
