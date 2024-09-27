@@ -1,10 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:umeals/Screens/login_register/login.dart';
-import 'package:umeals/Screens/login_register/register.dart';
-import 'package:umeals/Screens/mi_cuenta/editar.dart';
-import 'package:umeals/Screens/pagina_principal.dart';
-import 'package:umeals/config/Theme/appTheme.dart';
+import 'package:umeals/config/routes/app_route.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,13 +9,12 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
-    
-    return  MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme().getTheme(),
-        home: RegisterScreen(),    
+      routerConfig: AppRouter,
     );
   }
 }

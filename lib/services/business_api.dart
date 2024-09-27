@@ -24,6 +24,7 @@ class BusinessPage extends StatelessWidget {
     return FutureBuilder<List<BusinessModel>>(
       future: fetchBusinesses(),
       builder: (context, snapshot) {
+        print(snapshot);
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
