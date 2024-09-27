@@ -85,6 +85,7 @@ class MiCuenta extends StatelessWidget {
               title: const Text('Editar perfil'),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
+                
                 Navigator.push(context,MaterialPageRoute(builder: (context) => const Editar_cuenta())); 
               },
             ),

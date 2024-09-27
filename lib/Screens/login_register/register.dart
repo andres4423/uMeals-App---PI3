@@ -12,7 +12,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController nameController = TextEditingController();
+    final TextEditingController apellidosController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+    final TextEditingController telefonoController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -56,20 +58,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
-                  labelText: 'Nombre Completo',
-                  hintText: 'Ingrese sus nombres y apellidos',
-                  border: OutlineInputBorder(),
+                  labelText: 'Nombres Completo',
+                  hintText: 'Ingrese sus nombres',
+                  
                 ),
               ),
               SizedBox(height: 16),
               TextField(
+                controller: apellidosController,
+                decoration: InputDecoration(
+                  labelText: 'Apellidos',
+                  hintText: 'Ingrese apellidos',
+                ),
+              ),
+              SizedBox(height: 16),
+
+              TextField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Correo electrónico',
-                  hintText: 'Ingrese su correo institucional',
-                  border: OutlineInputBorder(),
+                  hintText: 'Ingrese su correo',
                 ),
               ),
+              SizedBox(height: 16), 
+
+                TextField(
+                controller: telefonoController,
+                decoration: InputDecoration(
+                  labelText: 'Número de telefono',
+                  hintText: 'Ingrese su número',
+                ),
+              ),
+
               SizedBox(height: 16), 
               TextField(
                 controller: passwordController,
@@ -77,7 +97,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 decoration: InputDecoration(
                   labelText: 'Contraseña',
                   hintText: 'Ingrese su contraseña',
-                  border: OutlineInputBorder(),
                 ),
               ),
               SizedBox(height: 40),
@@ -88,6 +107,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     nameController: nameController,
                     emailController: emailController,
                     passwordController: passwordController,
+                     apellidosController: apellidosController,
+                      telefonoController: telefonoController,
+                    
                   ).register();
                 },
                 style: ElevatedButton.styleFrom(
