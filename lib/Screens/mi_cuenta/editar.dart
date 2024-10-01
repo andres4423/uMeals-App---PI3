@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Editar_cuenta extends StatefulWidget {
   const Editar_cuenta({super.key});
@@ -22,6 +22,9 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
   final TextEditingController passController =
       TextEditingController(text: '12345');
 
+  File? _imageFile; // Variable para almacenar la imagen seleccionada
+  final ImagePicker _picker = ImagePicker(); // Instancia de ImagePicker
+
   InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
       labelText: labelText,
@@ -35,9 +38,18 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
+  // Función para seleccionar una imagen de la galería
+  Future<void> _pickImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _imageFile = File(image.path); // Actualiza la imagen
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-  
     final size = MediaQuery.of(context).size;
     final double avatarSize2 = size.width * 0.23;
     final double textFieldFontSize = size.width * 0.042; 
@@ -77,8 +89,10 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/cachi.jpeg'),
+                      child: CircleAvatar(
+                        backgroundImage: _imageFile != null
+                            ? FileImage(_imageFile!) // Muestra la imagen seleccionada
+                            : AssetImage('assets/cachi.jpeg') as ImageProvider, // Imagen por defecto
                       ),
                     ),
                   ),
@@ -96,6 +110,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         style: TextStyle(fontSize: textFieldFontSize),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios, size: iconSize),
+                      onTap: _pickImage, // Llama a la función al tocar el ListTile
                     ),
                   ),
                 ),

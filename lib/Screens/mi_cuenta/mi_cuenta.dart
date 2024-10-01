@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/editar.dart';
+import 'package:umeals/Screens/mi_cuenta/settings.dart';
 
 class MiCuenta extends StatelessWidget {
   const MiCuenta({super.key});
@@ -107,7 +108,10 @@ class MiCuenta extends StatelessWidget {
               title:  Text('Configuración',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
-                context.go('/settings');
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Settings_View()),
+                );
               },
             ),
             const SizedBox(height: 10),

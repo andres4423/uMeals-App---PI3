@@ -22,6 +22,10 @@ class _Settings_ViewState extends State<Settings_View> {
   final TextEditingController passController =
       TextEditingController(text: '12345');
 
+    bool _isEmailsEnabled = false; 
+
+    bool _isNotifEnabled = false; 
+
   InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
       labelText: labelText,
@@ -85,80 +89,110 @@ class _Settings_ViewState extends State<Settings_View> {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: 56.0,
-                      maxHeight: 70.0,
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        'Editar foto de perfil',
-                        style: TextStyle(fontSize: textFieldFontSize),
-                      ),
-                      trailing: Icon(Icons.arrow_forward_ios, size: iconSize),
-                    ),
-                  ),
+                  child: Column(
+                    children: [
+                      Text("Nombre del usuario", style: TextStyle(fontSize:size.width * 0.05 ),),
+                      Text("Correo del usuario", style: TextStyle(fontSize:size.width * 0.045 ),)
+                    ],
+                  )
                 ),
               ],
             ),
             SizedBox(height: 30),
             Text(
-              "Información Personal",
+              "Privacidad",
               style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 40),
-
-            //* Formularios
-            TextFormField(
-              controller: nombreController,
-              decoration: _buildInputDecoration('Nombre(s)', textFieldFontSize),
-              style: TextStyle(fontSize: textFieldFontSize),
+            SizedBox(height: 20),
+            
+            ListTile(
+              leading: const Icon(Icons.email, size: 25,),
+              title:  Text('Emails', style: TextStyle(fontSize:size.width * 0.0399 ),),
+              trailing: Switch(
+              value: _isEmailsEnabled, 
+              onChanged: (bool newValue) {
+                setState(() {
+                  _isEmailsEnabled = newValue; 
+                });
+              },
             ),
-            SizedBox(height: 40),
-
-            TextFormField(
-              controller: apellidosController,
-              decoration: _buildInputDecoration('Apellidos', textFieldFontSize),
-              style: TextStyle(fontSize: textFieldFontSize),
+              onTap: () {
+              },
             ),
-            SizedBox(height: 40),
-
-            TextFormField(
-              controller: telefonoController,
-              keyboardType: TextInputType.phone,
-              decoration: _buildInputDecoration('Teléfono', textFieldFontSize).copyWith(
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text('🇨🇴 +57', style: TextStyle(fontSize: textFieldFontSize)),
-                ),
-              ),
-              style: TextStyle(fontSize: textFieldFontSize),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.notifications, size: 25,),
+              title:  Text('Notificaciones push',style: TextStyle(fontSize:size.width * 0.0399 ),),
+              trailing: Switch(
+              value: _isNotifEnabled, 
+              onChanged: (bool newValue) {
+                setState(() {
+                  _isNotifEnabled = newValue; 
+                });
+              },
+              
             ),
-            SizedBox(height: 30),
-
-            Text(
-              "Seguridad y Cuenta",
-              style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
+              onTap: () {},
             ),
-            SizedBox(height: 25),
-
-            TextFormField(
-              controller: passController,
-              decoration: _buildInputDecoration('Contraseña', textFieldFontSize),
-              obscureText: true,
-              style: TextStyle(fontSize: textFieldFontSize),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.policy, size: 25,),
+              title:  Text('Políticas de privacidad',style: TextStyle(fontSize:size.width * 0.0399 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {},
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 20),
 
-            Padding(
+            //! SEGURIDAD
+
+            Text("Seguridad", style: TextStyle(fontSize:labelFontSize, fontWeight: FontWeight.bold ),),
+            SizedBox(height: size.width * 0.06,),
+
+            
+            ListTile(
+              leading: const Icon(Icons.verified, size: 25,),
+              title:  Text('Verificación en dos pasos',style: TextStyle(fontSize:size.width * 0.0399 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {},
+            ),
+
+           
+            SizedBox(height: 25,),
+
+            //! CHATEA CON NOSOTROS
+
+            
+            Text("Información", style: TextStyle(fontSize:labelFontSize, fontWeight: FontWeight.bold ),),
+            SizedBox(height: size.width * 0.03,),
+
+             ListTile(
+              leading: const Icon(Icons.help, size: 25,),
+              title:  Text('Términos y condiciones de uso',style: TextStyle(fontSize:size.width * 0.0399),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {},
+            ),
+
+
+            SizedBox(height: size.height * 0.03), 
+           ListTile(
+              leading: const Icon(Icons.logout, size: 25,),
+              title:  Text('Cerrar Sesión',style: TextStyle(fontSize:size.width * 0.0399 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                context.go("/login");
+              },
+            ),
+            SizedBox(height: 15,),
+            
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.15),
               child: Container(
-                width: size.width * 3,
-                height: size.height * 0.058,
+                width: 250,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: Colors.red,
+                    color: const Color.fromARGB(255, 255, 27, 27),
                     width: 2.0,
                   ),
                 ),
