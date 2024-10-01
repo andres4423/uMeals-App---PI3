@@ -126,7 +126,7 @@ class _BusinessCardState extends State<BusinessCard> {
                       const Icon(Icons.star, color: Colors.yellow, size: 20),
                       const SizedBox(width: 4),
                       Text(
-                        widget.business.rating.toString(),
+                        widget.business.calificacion.toString(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -242,7 +242,7 @@ class _BusinessCardState extends State<BusinessCard> {
                       const Icon(Icons.star, color: Colors.yellow, size: 20),
                       const SizedBox(width: 4),
                       Text(
-                        widget.business.rating.toString(),
+                        widget.business.calificacion.toString(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
