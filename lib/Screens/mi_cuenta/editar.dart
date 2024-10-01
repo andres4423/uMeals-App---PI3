@@ -11,15 +11,21 @@ class Editar_cuenta extends StatefulWidget {
 }
 
 class _Editar_cuentaState extends State<Editar_cuenta> {
-    final TextEditingController nombreController = TextEditingController(text: 'David Santiago');
-  final TextEditingController apellidosController = TextEditingController(text: 'Cárdenas Rivera');
-  final TextEditingController telefonoController = TextEditingController(text: '3223450293');
-  final TextEditingController correoController = TextEditingController(text: 'david.cardenas.2022@upb.edu.co');
-  final TextEditingController passController = TextEditingController(text:'12345');
-  InputDecoration _buildInputDecoration(String labelText) {
+  final TextEditingController nombreController =
+      TextEditingController(text: 'David Santiago');
+  final TextEditingController apellidosController =
+      TextEditingController(text: 'Cárdenas Rivera');
+  final TextEditingController telefonoController =
+      TextEditingController(text: '3223450293');
+  final TextEditingController correoController =
+      TextEditingController(text: 'david.cardenas.2022@upb.edu.co');
+  final TextEditingController passController =
+      TextEditingController(text: '12345');
+
+  InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
       labelText: labelText,
-      labelStyle: TextStyle(color: Colors.black, fontSize: 25),
+      labelStyle: TextStyle(color: Colors.black, fontSize: fontSize),
       filled: true,
       fillColor: Colors.grey[300],
       border: OutlineInputBorder(
@@ -29,14 +35,22 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    // Obtener el ancho y el alto de la pantalla
+    final size = MediaQuery.of(context).size;
+    final double avatarSize2 = size.width * 0.23;
+    final double textFieldFontSize = size.width * 0.042; 
+    final double labelFontSize = size.width * 0.055; 
+    final double iconSize = size.width * 0.08; 
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 38,),
+          icon: Icon(
+            Icons.arrow_back,
+            size: iconSize,
+          ),
           onPressed: () {
             context.go('/cuenta');
           },
@@ -45,7 +59,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 30),
+        padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,19 +67,18 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: avatarSize2, 
+                  height: avatarSize2, 
                   child: Center(
                     child: Container(
-                      width: 92,
-                      height: 92,
+                      width: avatarSize2, 
+                      height: avatarSize2, 
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
                       child: const CircleAvatar(
-                        radius: 45,
-                        backgroundImage: AssetImage('assets/cachi.jpeg',),
+                        backgroundImage: AssetImage('assets/cachi.jpeg'),
                       ),
                     ),
                   ),
@@ -74,91 +87,98 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                 Expanded(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      minHeight: 56.0, 
-                      maxHeight: 70.0, 
+                      minHeight: 56.0,
+                      maxHeight: 70.0,
                     ),
                     child: ListTile(
-                      title: const Text('Editar foto de perfil', style: TextStyle(fontSize: 25),),
-                      trailing: const Icon(Icons.arrow_forward_ios),
+                      title: Text(
+                        'Editar foto de perfil',
+                        style: TextStyle(fontSize: textFieldFontSize),
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios, size: iconSize),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 40,),
-            Text("Información Personal", style: TextStyle(fontSize: 25, ),),
-            SizedBox(height: 50,),
-
-            //*formularios 
-             TextFormField(
-              controller: nombreController,
-              decoration: _buildInputDecoration('Nombre(s)'),
-              style: TextStyle(
-                fontSize: 18
-              ),
+            SizedBox(height: 30),
+            Text(
+              "Información Personal",
+              style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 40),
 
-             SizedBox(height: 40,),
-             TextFormField(
+            //* Formularios
+            TextFormField(
               controller: nombreController,
-              decoration: _buildInputDecoration('Apellidos'),
-              style: TextStyle(
-                fontSize: 18
-              ),
+              decoration: _buildInputDecoration('Nombre(s)', textFieldFontSize),
+              style: TextStyle(fontSize: textFieldFontSize),
             ),
-             SizedBox(height: 40,),
+            SizedBox(height: 40),
 
-            //*formularios 
-             TextFormField(
-                controller: telefonoController,
-                keyboardType: TextInputType.phone,
-                decoration: _buildInputDecoration('Teléfono').copyWith( 
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text('🇨🇴 +57', style: TextStyle(fontSize: 16)),
-                  ),
-                  
+            TextFormField(
+              controller: apellidosController,
+              decoration: _buildInputDecoration('Apellidos', textFieldFontSize),
+              style: TextStyle(fontSize: textFieldFontSize),
+            ),
+            SizedBox(height: 40),
+
+            TextFormField(
+              controller: telefonoController,
+              keyboardType: TextInputType.phone,
+              decoration: _buildInputDecoration('Teléfono', textFieldFontSize).copyWith(
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text('🇨🇴 +57', style: TextStyle(fontSize: textFieldFontSize)),
                 ),
-                style: TextStyle(
-                fontSize: 18
               ),
-              ),
-             SizedBox(height: 30,),
-              Text("Seguridad y Cuenta", style: TextStyle(fontSize: 25, ),),
-             SizedBox(height: 30,),
-
-             TextFormField(
-              controller: passController,
-              decoration: _buildInputDecoration('Contraseña'),
-              obscureText: true,
-              style: TextStyle(
-                fontSize: 18
-              ),
+              style: TextStyle(fontSize: textFieldFontSize),
             ),
-          
-            SizedBox(height: 40,),
-             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
-               child: Container(
-                width: 300,
+            SizedBox(height: 30),
+
+            Text(
+              "Seguridad y Cuenta",
+              style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 25),
+
+            TextFormField(
+              controller: passController,
+              decoration: _buildInputDecoration('Contraseña', textFieldFontSize),
+              obscureText: true,
+              style: TextStyle(fontSize: textFieldFontSize),
+            ),
+            SizedBox(height: 40),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.15),
+              child: Container(
+                width: size.width * 3,
+                height: size.height * 0.058,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                   border: Border.all(
-               color: Colors.red, 
-                 width: 2.0, 
-                   ),
-                 
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 2.0,
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.delete, size: 35, color: Colors.red,),
-                    Text("Eliminar Cuenta", style: TextStyle(fontSize: 20),)
+                    Icon(
+                      Icons.delete,
+                      size: iconSize,
+                      color: Colors.red,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "Eliminar Cuenta",
+                      style: TextStyle(fontSize: textFieldFontSize, color: Colors.red),
+                    ),
                   ],
                 ),
-               ),
-             )
-              
+              ),
+            )
           ],
         ),
       ),
