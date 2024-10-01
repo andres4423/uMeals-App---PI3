@@ -31,8 +31,8 @@ class MiCuenta extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: screenSize.width * 0.25, // 25% del ancho de la pantalla
-                  height: screenSize.width * 0.25, // 25% del ancho de la pantalla
+                  width: screenSize.width * 0.25, 
+                  height: screenSize.width * 0.25, 
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -43,7 +43,7 @@ class MiCuenta extends StatelessWidget {
                   ),
                   child: Center(
                     child: Container(
-                      width: screenSize.width * 0.23, // Tamaño reducido para el avatar
+                      width: screenSize.width * 0.23, 
                       height: screenSize.width * 0.23,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
@@ -68,7 +68,7 @@ class MiCuenta extends StatelessWidget {
                       Text(
                         "David",
                         style: TextStyle(
-                          fontSize: screenSize.width * 0.06, // Tamaño dinámico para el texto
+                          fontSize: screenSize.width * 0.06, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -78,7 +78,7 @@ class MiCuenta extends StatelessWidget {
                 const SizedBox(width: 16),
                 Image.asset(
                   'assets/mano.jpeg',
-                  width: screenSize.width * 0.4, // Ajustado al 40% del ancho de pantalla
+                  width: screenSize.width * 0.4, 
                 ),
               ],
             ),
@@ -106,7 +106,9 @@ class MiCuenta extends StatelessWidget {
               leading: const Icon(Icons.settings, size: 25,),
               title:  Text('Configuración',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
               trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
+              onTap: () {
+                context.go('/settings');
+              },
             ),
             const SizedBox(height: 10),
             ListTile(

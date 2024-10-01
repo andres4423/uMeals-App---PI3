@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class Editar_cuenta extends StatefulWidget {
-  const Editar_cuenta({super.key});
+class Settings_View extends StatefulWidget {
+  const Settings_View({super.key});
 
   @override
-  State<Editar_cuenta> createState() => _Editar_cuentaState();
+  State<Settings_View> createState() => _Settings_ViewState();
 }
 
-class _Editar_cuentaState extends State<Editar_cuenta> {
+class _Settings_ViewState extends State<Settings_View> {
   final TextEditingController nombreController =
       TextEditingController(text: 'David Santiago');
   final TextEditingController apellidosController =
