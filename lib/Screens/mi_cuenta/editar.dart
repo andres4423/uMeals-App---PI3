@@ -91,8 +91,8 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                       ),
                       child: CircleAvatar(
                         backgroundImage: _imageFile != null
-                            ? FileImage(_imageFile!) // Muestra la imagen seleccionada
-                            : AssetImage('assets/cachi.jpeg') as ImageProvider, // Imagen por defecto
+                            ? FileImage(_imageFile!) 
+                            : AssetImage('assets/cachi.jpeg') as ImageProvider, 
                       ),
                     ),
                   ),
@@ -110,7 +110,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         style: TextStyle(fontSize: textFieldFontSize),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios, size: iconSize),
-                      onTap: _pickImage, // Llama a la función al tocar el ListTile
+                      onTap: _pickImage, 
                     ),
                   ),
                 ),

@@ -10,7 +10,7 @@ class CarruselApi extends StatelessWidget {
   const CarruselApi({super.key});
 
   Future<List<InfoSwiper>> fetchCarruselImages() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:3002/getCarruselImages'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:3000/getCarruselImages'));
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
       print(data);
