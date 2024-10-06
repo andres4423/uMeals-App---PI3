@@ -9,8 +9,12 @@ class RegisterService{
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-
-  RegisterService( {
+  final TextEditingController apellidosController;
+  final TextEditingController telefonoController;
+  
+  RegisterService({
+    required this.apellidosController,
+     required this.telefonoController,
     required  this.nameController,
     required this.context,
     required this.emailController,
@@ -25,6 +29,8 @@ class RegisterService{
           'Nombre': nameController.text,
           'correo': emailController.text, 
           'password': passwordController.text,
+          'Apellidos': apellidosController.text,
+          'telefono': telefonoController.text
         }),
       );
 

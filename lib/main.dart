@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:umeals/Screens/pagina_principal.dart';
 import 'package:umeals/config/Theme/appTheme.dart';
 
+
 void main() {
   runApp(const MainApp());
 }
@@ -10,13 +11,13 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
-    
-    return  MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme().getTheme(),
-        home: const PaginaPrincipal(),    
+
+      routerConfig: AppRouter,
     );
   }
 }

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
+import 'package:umeals/Screens/mi_cuenta/editar.dart';
+import 'package:umeals/Screens/mi_cuenta/settings.dart';
 
 class MiCuenta extends StatelessWidget {
   const MiCuenta({super.key});
 
   @override
   Widget build(BuildContext context) {
+   
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, size: 30),
           onPressed: () {
             context.go('/');
           },
@@ -26,8 +32,8 @@ class MiCuenta extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: screenSize.width * 0.25, 
+                  height: screenSize.width * 0.25, 
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -38,20 +44,19 @@ class MiCuenta extends StatelessWidget {
                   ),
                   child: Center(
                     child: Container(
-                      width: 92,
-                      height: 92,
+                      width: screenSize.width * 0.23, 
+                      height: screenSize.width * 0.23,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
                       child: const CircleAvatar(
-                        radius: 45,
                         backgroundImage: AssetImage('assets/cachi.jpeg'),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 18),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,10 +66,10 @@ class MiCuenta extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
+                      Text(
                         "David",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: screenSize.width * 0.06, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -74,53 +79,75 @@ class MiCuenta extends StatelessWidget {
                 const SizedBox(width: 16),
                 Image.asset(
                   'assets/mano.jpeg',
-                  width: 140, // Ajusta el tamaño de la imagen según sea necesario
+                  width: screenSize.width * 0.4, 
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             ListTile(
-              leading: const Icon(Icons.edit),
-              title: const Text('Editar perfil'),
+              leading: const Icon(Icons.edit, size: 25,),
+              title:  Text('Editar perfil', style: TextStyle(fontSize:screenSize.width * 0.045 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Editar_cuenta()),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.message, size: 25,),
+              title:  Text('Enviar mensaje',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {},
             ),
+            const SizedBox(height: 10),
             ListTile(
-              leading: const Icon(Icons.message),
-              title: const Text('Enviar mensaje'),
+              leading: const Icon(Icons.settings, size: 25,),
+              title:  Text('Configuración',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Settings_View()),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.help, size: 25,),
+              title:  Text('Ayuda',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AyudaView()),
+                );
+              },
+            ),
+            SizedBox(height: screenSize.height * 0.15), 
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.logout, size: 25,),
+              title:  Text('Cerrar Sesión',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                context.go("/login");
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.business, size: 25,),
+              title:  Text('Ser Comerciante',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {},
             ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Configuración'),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.help),
-              title: const Text('Ayuda'),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
-            ),
-            const SizedBox(height: 150),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Cerrar Sesión'),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.business),
-              title: const Text('Ser Comerciante'),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             Center(
               child: Image.asset(
                 'assets/UMEALSXUPB.jpeg',
-                width: 250,
+                width: screenSize.width * 0.7,
               ),
             ),
             const Center(

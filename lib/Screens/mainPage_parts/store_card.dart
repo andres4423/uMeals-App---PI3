@@ -33,6 +33,7 @@ class _BusinessCardState extends State<BusinessCard> {
 
     Future<void> _updateIconStatus() async {
       if (widget.business.estado == 0) {
+        
         _iconColor = Colors.red;
       } else if (widget.business.estado == 1) {
         _iconStatus = true;
@@ -41,15 +42,19 @@ class _BusinessCardState extends State<BusinessCard> {
     }
 
     Future<void> _animateIcon() async {
-      while (_iconStatus) {
-        _iconColor = Colors.white;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 500));
-        _iconColor = Colors.green.shade500;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 500));
-      }
-    }
+  while (_iconStatus) {
+    if (!mounted) return; // Verificar si el widget está montado antes de llamar a setState
+    _iconColor = Colors.white;
+    setState(() {});
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    if (!mounted) return; // Verificar nuevamente después del delay
+    _iconColor = Colors.green.shade500;
+    setState(() {});
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
+}
+
 
   Future<void> _updatePalette() async {
     final PaletteGenerator paletteGenerator =

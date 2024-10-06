@@ -9,7 +9,7 @@ class BusinessPage extends StatelessWidget {
   const BusinessPage({super.key});
 
   Future<List<BusinessModel>> fetchBusinesses() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:3002/emprendimientos'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:3000/emprendimientos'));
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
       print(data);
@@ -24,6 +24,7 @@ class BusinessPage extends StatelessWidget {
     return FutureBuilder<List<BusinessModel>>(
       future: fetchBusinesses(),
       builder: (context, snapshot) {
+        print(snapshot);
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
