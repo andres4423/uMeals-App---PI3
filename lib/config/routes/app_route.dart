@@ -12,10 +12,10 @@ final AppRouter = GoRouter(
   
 //* Para pasar id es así:
 routes: [
-  
+
 GoRoute(
 path: '/',
-builder: (context, state) => const PaginaPrincipal(),
+builder: (context, state) =>  LoginScreen(),
 ),
 
 GoRoute(

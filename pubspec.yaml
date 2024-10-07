@@ -33,11 +33,11 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^14.2.3
+  google_maps_flutter: ^2.1.1
   http: ^1.2.2
   image_picker: ^1.1.2
   palette_generator: ^0.3.3+4
-  google_maps_flutter: ^2.1.1
-  shared_preferences: ^2.0.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_lints: ^3.0.0
