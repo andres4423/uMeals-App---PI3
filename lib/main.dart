@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:umeals/Screens/pagina_principal.dart';
-import 'package:umeals/config/Theme/appTheme.dart';
+import 'package:umeals/config/routes/app_route.dart';
+
 
 
 void main() {

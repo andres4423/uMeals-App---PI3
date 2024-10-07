@@ -32,7 +32,7 @@ class MiCuenta extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: screenSize.width * 0.25, 
+                  width: screenSize.width * 0.24, 
                   height: screenSize.width * 0.25, 
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
@@ -44,8 +44,8 @@ class MiCuenta extends StatelessWidget {
                   ),
                   child: Center(
                     child: Container(
-                      width: screenSize.width * 0.23, 
-                      height: screenSize.width * 0.23,
+                      width: screenSize.width * 0.25, 
+                      height: screenSize.width * 0.215,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -69,14 +69,14 @@ class MiCuenta extends StatelessWidget {
                       Text(
                         "David",
                         style: TextStyle(
-                          fontSize: screenSize.width * 0.06, 
+                          fontSize: screenSize.width * 0.055, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 12),
                 Image.asset(
                   'assets/mano.jpeg',
                   width: screenSize.width * 0.4, 
