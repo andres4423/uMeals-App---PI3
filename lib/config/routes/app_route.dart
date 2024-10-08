@@ -6,7 +6,6 @@ import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/editar.dart';
 import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
-import 'package:umeals/Screens/pagina_principal.dart';
 
 final AppRouter = GoRouter(
   
@@ -30,12 +29,7 @@ GoRoute(
     return  LoginScreen();
   }
 ),
-GoRoute(
-  path: '/editar_cuenta',
-  builder: (context, state){
-    return const Editar_cuenta();
-  }
-  ),
+
   GoRoute(
   path: '/ayuda',
   builder: (context, state){

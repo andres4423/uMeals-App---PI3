@@ -3,13 +3,41 @@ import 'package:go_router/go_router.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/editar.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
+import 'package:umeals/domain/types/user_model.dart';
+import 'package:umeals/services/cuenta_service.dart'; // Importar el modelo de usuario
 
-class MiCuenta extends StatelessWidget {
+class MiCuenta extends StatefulWidget {
   const MiCuenta({super.key});
 
   @override
+  _MiCuentaState createState() => _MiCuentaState();
+}
+
+class _MiCuentaState extends State<MiCuenta> {
+  User? _user;  
+  bool _isLoading = true; 
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserInfo(); 
+  }
+
+Future<void> _fetchUserInfo() async {
+  UserInfoService userInfoService = UserInfoService();
+  User? user = await userInfoService.fetchUserInfo();
+  
+
+  print(user?.nombre ?? 'Usuario no encontrado');
+
+  setState(() {
+    _user = user;  
+    _isLoading = false;  
+  });
+}
+
+  @override
   Widget build(BuildContext context) {
-   
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -32,8 +60,8 @@ class MiCuenta extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: screenSize.width * 0.24, 
-                  height: screenSize.width * 0.25, 
+                  width: screenSize.width * 0.24,
+                  height: screenSize.width * 0.25,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -44,7 +72,7 @@ class MiCuenta extends StatelessWidget {
                   ),
                   child: Center(
                     child: Container(
-                      width: screenSize.width * 0.25, 
+                      width: screenSize.width * 0.25,
                       height: screenSize.width * 0.215,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
@@ -66,20 +94,23 @@ class MiCuenta extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 8),
-                      Text(
-                        "David",
-                        style: TextStyle(
-                          fontSize: screenSize.width * 0.055, 
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                     
+                      _isLoading
+                          ? const CircularProgressIndicator()  
+                          : Text(
+                              _user?.nombre ?? 'Usuario', 
+                              style: TextStyle(
+                                fontSize: screenSize.width * 0.055,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ],
                   ),
                 ),
                 const SizedBox(width: 12),
                 Image.asset(
                   'assets/mano.jpeg',
-                  width: screenSize.width * 0.4, 
+                  width: screenSize.width * 0.4,
                 ),
               ],
             ),
@@ -91,7 +122,7 @@ class MiCuenta extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Editar_cuenta()),
+                  MaterialPageRoute(builder: (context) =>  Editar_cuenta(user: _user!)),
                 );
               },
             ),
@@ -126,7 +157,7 @@ class MiCuenta extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: screenSize.height * 0.15), 
+            SizedBox(height: screenSize.height * 0.15),
             const SizedBox(height: 10),
             ListTile(
               leading: const Icon(Icons.logout, size: 25,),

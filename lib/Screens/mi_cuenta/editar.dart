@@ -2,28 +2,37 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:umeals/domain/types/user_model.dart';
 
 class Editar_cuenta extends StatefulWidget {
-  const Editar_cuenta({super.key});
+  final User user;
+  const Editar_cuenta({super.key, required this.user});
 
   @override
   State<Editar_cuenta> createState() => _Editar_cuentaState();
 }
 
 class _Editar_cuentaState extends State<Editar_cuenta> {
-  final TextEditingController nombreController =
-      TextEditingController(text: 'David Santiago');
-  final TextEditingController apellidosController =
-      TextEditingController(text: 'Cárdenas Rivera');
-  final TextEditingController telefonoController =
-      TextEditingController(text: '3223450293');
-  final TextEditingController correoController =
-      TextEditingController(text: 'david.cardenas.2022@upb.edu.co');
-  final TextEditingController passController =
-      TextEditingController(text: '12345');
 
-  File? _imageFile; // Variable para almacenar la imagen seleccionada
-  final ImagePicker _picker = ImagePicker(); // Instancia de ImagePicker
+    late TextEditingController nombreController;
+  late TextEditingController apellidosController;
+  late TextEditingController telefonoController;
+  late TextEditingController correoController;
+  late TextEditingController passController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializa los controladores aquí
+    nombreController = TextEditingController(text: widget.user.nombre);
+    apellidosController = TextEditingController(text: widget.user.apellidos);
+    telefonoController = TextEditingController(text: widget.user.telefono.toString());
+    correoController = TextEditingController(text: widget.user.correo);
+    passController = TextEditingController(text: ''); 
+  }
+  
+  File? _imageFile; 
+  final ImagePicker _picker = ImagePicker(); 
 
   InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
@@ -38,12 +47,12 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
-  // Función para seleccionar una imagen de la galería
+
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
-        _imageFile = File(image.path); // Actualiza la imagen
+        _imageFile = File(image.path); 
       });
     }
   }
