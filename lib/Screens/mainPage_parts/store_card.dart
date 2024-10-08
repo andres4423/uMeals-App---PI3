@@ -3,16 +3,20 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:umeals/domain/types/business_model.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:umeals/services/favorites_api.dart';
 import 'package:umeals/services/single_business_api.dart';
 
+// ignore: must_be_immutable
 class BusinessCard extends StatefulWidget {
   final BusinessModel business;
   final double altura;
+  bool isFavorite;
 
-  const BusinessCard({
+  BusinessCard({
     super.key,
     required this.altura,
     required this.business,
+    required this.isFavorite,
   });
 
   @override
@@ -21,7 +25,7 @@ class BusinessCard extends StatefulWidget {
 
 class _BusinessCardState extends State<BusinessCard> {
   Color _dominantColor = Colors.transparent;
-  bool _iconStatus = false; 
+  bool _iconStatus = false;
   Color _iconColor = Colors.white;
 
   @override
@@ -31,30 +35,29 @@ class _BusinessCardState extends State<BusinessCard> {
     _updateIconStatus();
   }
 
-    Future<void> _updateIconStatus() async {
-      if (widget.business.estado == 0) {
-        
-        _iconColor = Colors.red;
-      } else if (widget.business.estado == 1) {
-        _iconStatus = true;
-        await _animateIcon();
-      }
+  Future<void> _updateIconStatus() async {
+    if (widget.business.estado == 0) {
+      _iconColor = Colors.red;
+    } else if (widget.business.estado == 1) {
+      _iconStatus = true;
+      await _animateIcon();
     }
-
-    Future<void> _animateIcon() async {
-  while (_iconStatus) {
-    if (!mounted) return; // Verificar si el widget está montado antes de llamar a setState
-    _iconColor = Colors.white;
-    setState(() {});
-    await Future.delayed(const Duration(milliseconds: 500));
-    
-    if (!mounted) return; // Verificar nuevamente después del delay
-    _iconColor = Colors.green.shade500;
-    setState(() {});
-    await Future.delayed(const Duration(milliseconds: 500));
   }
-}
 
+  Future<void> _animateIcon() async {
+    while (_iconStatus) {
+      if (!mounted)
+        return; // Verificar si el widget está montado antes de llamar a setState
+      _iconColor = Colors.white;
+      setState(() {});
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (!mounted) return; // Verificar nuevamente después del delay
+      _iconColor = Colors.green.shade500;
+      setState(() {});
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+  }
 
   Future<void> _updatePalette() async {
     final PaletteGenerator paletteGenerator =
@@ -86,11 +89,11 @@ class _BusinessCardState extends State<BusinessCard> {
       return GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SingleBusinessPage(business: widget.business),
-            )
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    SingleBusinessPage(business: widget.business),
+              ));
         },
         child: Container(
           height: widget.altura,
@@ -157,9 +160,11 @@ class _BusinessCardState extends State<BusinessCard> {
                 left: 16,
                 right: 16,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   decoration: BoxDecoration(
-                  color: _dominantColor.withAlpha((_dominantColor.alpha * 0.9).toInt()),
+                    color: _dominantColor
+                        .withAlpha((_dominantColor.alpha * 0.9).toInt()),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -183,11 +188,10 @@ class _BusinessCardState extends State<BusinessCard> {
               Positioned(
                 bottom: 15,
                 left: 16,
-                child:
-                  CircleAvatar(
+                child: CircleAvatar(
                   radius: 25,
                   backgroundImage: NetworkImage(widget.business.logotipoImgUrl),
-                  ),
+                ),
               ),
               Positioned(
                 bottom: 8,
@@ -198,7 +202,30 @@ class _BusinessCardState extends State<BusinessCard> {
                     Icon(Icons.compass_calibration_rounded, color: _iconColor),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.favorite_border, color: Colors.white),
+                      icon: IconButton(
+                        icon: Icon(
+                          widget.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: widget.isFavorite ? Colors.red : Colors.white,
+                        ),
+                        onPressed: () async {
+                          final favoritesApi = FavoritesApi();
+                          if (widget.isFavorite) {
+                            await favoritesApi.deleteFavorite(
+                            widget.business.idEMPRENDIMIENTOS.toString());
+                            setState(() {
+                              widget.isFavorite = false;
+                            });
+                          } else {
+                            await favoritesApi.addFavorite(
+                            widget.business.idEMPRENDIMIENTOS.toString());
+                            setState(() {
+                              widget.isFavorite = true;
+                            });
+                          }
+                        },
+                      ),
                       padding: EdgeInsets.zero,
                     ),
                   ],
@@ -212,13 +239,13 @@ class _BusinessCardState extends State<BusinessCard> {
       return GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SingleBusinessPage(business: widget.business),
-            )
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    SingleBusinessPage(business: widget.business),
+              ));
         },
-        child: Container(  
+        child: Container(
           height: widget.altura,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -283,9 +310,11 @@ class _BusinessCardState extends State<BusinessCard> {
                 left: 16,
                 right: 120,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   decoration: BoxDecoration(
-                  color: _dominantColor.withAlpha((_dominantColor.alpha * 0.9).toInt()),
+                    color: _dominantColor
+                        .withAlpha((_dominantColor.alpha * 0.9).toInt()),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -309,11 +338,10 @@ class _BusinessCardState extends State<BusinessCard> {
               Positioned(
                 top: 15,
                 right: 16,
-                child:
-                  CircleAvatar(
+                child: CircleAvatar(
                   radius: 25,
                   backgroundImage: NetworkImage(widget.business.logotipoImgUrl),
-                  ),
+                ),
               ),
               Positioned(
                 bottom: 8,
@@ -324,8 +352,27 @@ class _BusinessCardState extends State<BusinessCard> {
                     Icon(Icons.compass_calibration_rounded, color: _iconColor),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.favorite_border, color: Colors.white),
-                      padding: EdgeInsets.zero, // Elimina cualquier padding interno del botón
+                      icon: IconButton(
+                        icon: Icon(
+                          widget.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: widget.isFavorite ? Colors.red : Colors.white,
+                        ),
+                        onPressed: () async {
+                          final favoritesApi = FavoritesApi();
+                          if (widget.isFavorite) {
+                            await favoritesApi.deleteFavorite(
+                            widget.business.idEMPRENDIMIENTOS.toString());
+                            widget.isFavorite = false;
+                          } else {
+                            await favoritesApi.addFavorite(
+                            widget.business.idEMPRENDIMIENTOS.toString());
+                            widget.isFavorite = true;
+                          }
+                        },
+                      ),
+                      padding: EdgeInsets.zero,
                     ),
                   ],
                 ),

@@ -13,7 +13,7 @@ class SingleBusinessPage extends StatelessWidget {
   Future<List<ProductModel>> fetchProducts() async {
     final id = business.idEMPRENDIMIENTOS;
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3002/productos/$id'));
+        await http.get(Uri.parse('http://10.0.2.2:3000/productos/$id'));
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
       print(data);

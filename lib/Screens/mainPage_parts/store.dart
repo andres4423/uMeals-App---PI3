@@ -54,7 +54,9 @@ class _DetailedViewState extends State<DetailedView> {
                     top: 30,
                     left: 16,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
                     ),
                   ),

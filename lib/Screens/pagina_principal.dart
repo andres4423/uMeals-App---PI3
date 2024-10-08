@@ -24,9 +24,9 @@ class _HomeViews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: AppBarMain(),
         ),
  
@@ -34,11 +34,11 @@ class _HomeViews extends StatelessWidget {
              SliverToBoxAdapter(
                child: Column(
                   children: [
-                    const SizedBox(height: 10,),
+                    SizedBox(height: 10,),
                     // SwiperInfo(),
-                    const CarruselApi(),
-                    const Divider(thickness: 1, color: Colors.black,),
-                    const BusinessPage()
+                    CarruselApi(),
+                    Divider(thickness: 1, color: Colors.black,),
+                    BusinessPage()
                   ],
                 ),
              )
