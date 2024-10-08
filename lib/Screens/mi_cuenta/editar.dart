@@ -31,8 +31,6 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     passController = TextEditingController(text: ''); 
   }
   
-  File? _imageFile; 
-  final ImagePicker _picker = ImagePicker(); 
 
   InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
@@ -47,6 +45,9 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
+//! TODO: ACTUALIZAR IMAGEN
+  File? _imageFile; 
+  final ImagePicker _picker = ImagePicker(); 
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -56,6 +57,8 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
       });
     }
   }
+
+//todo: Terminar un botón para un udpate.
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:umeals/Screens/login_register/login.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
-import 'package:umeals/Screens/mi_cuenta/editar.dart';
 import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
 

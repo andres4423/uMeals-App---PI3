@@ -84,7 +84,7 @@ Future<void> _fetchUserInfo() async {
                     ),
                   ),
                 ),
-                const SizedBox(width: 18),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,14 +100,14 @@ Future<void> _fetchUserInfo() async {
                           : Text(
                               _user?.nombre ?? 'Usuario', 
                               style: TextStyle(
-                                fontSize: screenSize.width * 0.055,
+                                fontSize: screenSize.width * 0.048,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 5),
                 Image.asset(
                   'assets/mano.jpeg',
                   width: screenSize.width * 0.4,
