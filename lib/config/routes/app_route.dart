@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:go_router/go_router.dart';
 import 'package:umeals/Screens/login_register/login.dart';
+import 'package:umeals/Screens/orden_pedido/checkout.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
@@ -13,6 +14,11 @@ final AppRouter = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => SplashScreen(), 
+    ),
+
+    GoRoute(
+      path: '/orden',
+      builder: (context, state) => OrderScreen(),
     ),
     
     GoRoute(
@@ -40,5 +46,6 @@ final AppRouter = GoRouter(
         return const Settings_View();
       },
     ),
+    
   ],
 );

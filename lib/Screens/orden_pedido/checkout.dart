@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
-import 'package:umeals/widgets/animatedPaymentCards.dart'; 
+import 'package:umeals/widgets/animatedPaymentCards.dart';
 
 class OrderScreen extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  bool isDeliverySelected = false; 
+  bool isDeliverySelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _OrderScreenState extends State<OrderScreen> {
             ListTile(
               leading: CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage('assets/Arteysano.png'), 
+                backgroundImage: AssetImage('assets/Arteysano.png'),
               ),
               title: Text('ArteySano'),
               subtitle: Text('2 productos'),
@@ -60,7 +60,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
                             child: Container(
-                              height: 50, 
+                              height: 50,
                               child: ChoiceChip(
                                 label: Text(
                                   'Voy yo',
@@ -89,7 +89,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
                             child: Container(
-                              height: 50, 
+                              height: 50,
                               child: ChoiceChip(
                                 label: Text(
                                   'A domicilio',
@@ -123,13 +123,13 @@ class _OrderScreenState extends State<OrderScreen> {
                     height: 200,
                     child: GoogleMap(
                       initialCameraPosition: CameraPosition(
-                        target: LatLng(4.7110, -74.0721),
-                        zoom: 14,
+                        target: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
+                        zoom: 18, // Ajusta el nivel de zoom si es necesario
                       ),
                       markers: {
                         Marker(
                           markerId: MarkerId('vendedor'),
-                          position: LatLng(4.7110, -74.0721),
+                          position: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
                         ),
                       },
                     ),
@@ -171,8 +171,8 @@ class _OrderScreenState extends State<OrderScreen> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 20.0), 
-                          backgroundColor: Color(0xFF174411), 
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          backgroundColor: Color(0xFF174411),
                         ),
                       ),
                     ),
@@ -183,7 +183,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: ElevatedButton.icon(
                         onPressed: () {
-
+                          // Acción del botón
                         },
                         icon: Icon(
                           Icons.chat,
@@ -191,8 +191,8 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                         label: Text(''),
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 20.0), 
-                          backgroundColor: Color(0xFF174411), 
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          backgroundColor: Color(0xFF174411),
                         ),
                       ),
                     ),
@@ -203,7 +203,7 @@ class _OrderScreenState extends State<OrderScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Customnavbutton(), 
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }

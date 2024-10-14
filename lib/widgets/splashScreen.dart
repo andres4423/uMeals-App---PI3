@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:connectivity_plus/connectivity_plus.dart'; // Asegúrate de agregar esta dependencia en tu pubspec.yaml
+import 'package:connectivity_plus/connectivity_plus.dart'; 
 
 class SplashScreen extends StatefulWidget {
   @override
