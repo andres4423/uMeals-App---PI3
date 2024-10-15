@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         child: _hasConnection
             ? ScaleTransition(
                 scale: _scaleAnimation,
-                child: Image.asset('assets/logoUmeals.png'), 
+                child: Image.asset('assets/umealsLogoRojo.png'), 
               )
             : _buildErrorScreen(), 
       ),

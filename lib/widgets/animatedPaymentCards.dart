@@ -66,7 +66,7 @@ class _AnimatedPaymentCardsState extends State<AnimatedPaymentCards> {
                       ),
                     ),
                   ),
-                  if (index == 2)
+                  if (index == 0)
                     Center(
                       child: Image.asset(
                         'assets/efectivo.png', 
