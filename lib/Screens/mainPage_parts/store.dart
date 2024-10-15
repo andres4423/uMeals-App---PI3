@@ -386,7 +386,7 @@ class ProductTab extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                height: 260,
+                height: 270,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: products.length,
