@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:umeals/domain/types/user_model.dart';
+import 'package:umeals/services/update_service.dart';
+
 
 class Editar_cuenta extends StatefulWidget {
   final User user;
@@ -13,24 +15,23 @@ class Editar_cuenta extends StatefulWidget {
 }
 
 class _Editar_cuentaState extends State<Editar_cuenta> {
-
-    late TextEditingController nombreController;
+  late TextEditingController nombreController;
   late TextEditingController apellidosController;
   late TextEditingController telefonoController;
   late TextEditingController correoController;
   late TextEditingController passController;
 
+  bool showEditButton = false;
+
   @override
   void initState() {
     super.initState();
-    // Inicializa los controladores aquí
     nombreController = TextEditingController(text: widget.user.nombre);
     apellidosController = TextEditingController(text: widget.user.apellidos);
     telefonoController = TextEditingController(text: widget.user.telefono.toString());
     correoController = TextEditingController(text: widget.user.correo);
-    passController = TextEditingController(text: ''); 
+    passController = TextEditingController(text: widget.user.password);
   }
-  
 
   InputDecoration _buildInputDecoration(String labelText, double fontSize) {
     return InputDecoration(
@@ -45,28 +46,69 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
-//! TODO: ACTUALIZAR IMAGEN
-  File? _imageFile; 
-  final ImagePicker _picker = ImagePicker(); 
+  File? _imageFile;
+  final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
-        _imageFile = File(image.path); 
+        _imageFile = File(image.path);
+        _checkForChanges();
       });
     }
   }
 
-//todo: Terminar un botón para un udpate.
+  void _checkForChanges() {
+    setState(() {
+      showEditButton = nombreController.text != widget.user.nombre ||
+          apellidosController.text != widget.user.apellidos ||
+          telefonoController.text != widget.user.telefono.toString() ||
+          passController.text != widget.user.password;
+    });
+  }
+
+  Future<void> _editUserInformation() async {
+    final updateUserService = UpdateUser();
+    final updatedUser = User(
+      nombre: nombreController.text,
+      apellidos: apellidosController.text,
+      telefono: int.parse(telefonoController.text),
+      correo: correoController.text,
+      password: passController.text,
+      imageURL: _imageFile?.path, 
+    );
+
+    final success = await updateUserService.updateUserInfo(updatedUser);
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Información actualizada con éxito')),
+      );
+
+     
+      setState(() {
+        widget.user.nombre = updatedUser.nombre;
+        widget.user.apellidos = updatedUser.apellidos;
+        widget.user.telefono = updatedUser.telefono;
+        widget.user.correo = updatedUser.correo;
+        widget.user.password = updatedUser.password;
+       
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al actualizar información')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final double avatarSize2 = size.width * 0.23;
-    final double textFieldFontSize = size.width * 0.042; 
-    final double labelFontSize = size.width * 0.055; 
-    final double iconSize = size.width * 0.08; 
+    final double textFieldFontSize = size.width * 0.042;
+    final double labelFontSize = size.width * 0.055;
+    final double iconSize = size.width * 0.08;
 
     return Scaffold(
       appBar: AppBar(
@@ -91,20 +133,20 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: avatarSize2, 
-                  height: avatarSize2, 
+                  width: avatarSize2,
+                  height: avatarSize2,
                   child: Center(
                     child: Container(
-                      width: avatarSize2, 
-                      height: avatarSize2, 
+                      width: avatarSize2,
+                      height: avatarSize2,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
                       child: CircleAvatar(
                         backgroundImage: _imageFile != null
-                            ? FileImage(_imageFile!) 
-                            : AssetImage('assets/cachi.jpeg') as ImageProvider, 
+                            ? FileImage(_imageFile!)
+                            : AssetImage('assets/cachi.jpeg') as ImageProvider,
                       ),
                     ),
                   ),
@@ -122,7 +164,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         style: TextStyle(fontSize: textFieldFontSize),
                       ),
                       trailing: Icon(Icons.arrow_forward_ios, size: iconSize),
-                      onTap: _pickImage, 
+                      onTap: _pickImage,
                     ),
                   ),
                 ),
@@ -135,11 +177,11 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
             ),
             SizedBox(height: 40),
 
-            //* Formularios
             TextFormField(
               controller: nombreController,
               decoration: _buildInputDecoration('Nombre(s)', textFieldFontSize),
               style: TextStyle(fontSize: textFieldFontSize),
+              onChanged: (value) => _checkForChanges(),
             ),
             SizedBox(height: 40),
 
@@ -147,12 +189,14 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               controller: apellidosController,
               decoration: _buildInputDecoration('Apellidos', textFieldFontSize),
               style: TextStyle(fontSize: textFieldFontSize),
+              onChanged: (value) => _checkForChanges(),
             ),
             SizedBox(height: 40),
 
             TextFormField(
               controller: telefonoController,
               keyboardType: TextInputType.phone,
+              onChanged: (value) => _checkForChanges(),
               decoration: _buildInputDecoration('Teléfono', textFieldFontSize).copyWith(
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -161,7 +205,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               ),
               style: TextStyle(fontSize: textFieldFontSize),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
 
             Text(
               "Seguridad y Cuenta",
@@ -174,8 +218,45 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               decoration: _buildInputDecoration('Contraseña', textFieldFontSize),
               obscureText: true,
               style: TextStyle(fontSize: textFieldFontSize),
+              onChanged: (value) => _checkForChanges(),
             ),
             SizedBox(height: 40),
+
+            // Botón para editar información
+            if (showEditButton)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.15),
+                child: GestureDetector(
+                  onTap: _editUserInformation,
+                  child: Container(
+                    width: size.width * 3,
+                    height: size.height * 0.058,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.purple,
+                        width: 2.0,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          size: iconSize,
+                          color: Colors.purple,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Editar información",
+                          style: TextStyle(fontSize: textFieldFontSize, color: Colors.purple),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            SizedBox(height: 20),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.15),
