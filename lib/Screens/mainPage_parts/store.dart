@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umeals/Screens/review/bussinessReviewPage.dart';
 import 'package:umeals/domain/types/business_model.dart';
 import 'package:umeals/domain/types/product_model.dart';
 
@@ -78,7 +79,7 @@ class _DetailedViewState extends State<DetailedView> {
                   Positioned(
                     left: 0,
                     right: 0,
-                    top: 100,
+                    top: 80,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -100,8 +101,20 @@ class _DetailedViewState extends State<DetailedView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              const Icon(Icons.star, color: Colors.yellow),
-                              const SizedBox(width: 5),
+                              IconButton(
+                                icon: const Icon(Icons.star,
+                                    color: Colors.yellow),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BusinessReviewPage(),
+                                    ),
+                                  );
+                                },
+                              ),
+                              // const SizedBox(width: 5),
                               Text(
                                 widget.business.calificacion.toString(),
                                 style: const TextStyle(color: Colors.white),
@@ -426,17 +439,19 @@ class ProductTab extends StatelessWidget {
                     backgroundImage: NetworkImage(product.imgURL),
                   ),
                   const SizedBox(height: 10),
-                  Text(
+                    Text(
                     product.nombre,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.brown,
                     ),
-                  ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    ),
                   const SizedBox(height: 5),
                   Text(
-                    product.precio.toString(),
+                    '\$${product.precio.toString().replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}', 
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

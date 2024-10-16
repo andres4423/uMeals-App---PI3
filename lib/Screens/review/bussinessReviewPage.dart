@@ -3,25 +3,29 @@ import 'package:umeals/widgets/review_item.dart';
 import 'package:umeals/Screens/mainPage_parts/customNavButton.dart'; 
 
 class BusinessReviewPage extends StatelessWidget {
+  const BusinessReviewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
+            Navigator.pop(context);
           },
         ),
-        title: Text(
-          'ArteySano',
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        elevation: 0,
+        // title: Text(
+        //   'ArteySano',
+        //   style: TextStyle(color: Colors.black),
+        // ),
+        // centerTitle: true,
+        // elevation: 0,
       ),
       body: ListView(
         children: [
+          SizedBox(height: 30),
           Column(
             children: [
               CircleAvatar(
