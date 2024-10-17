@@ -449,7 +449,7 @@ class InformationTab extends StatelessWidget {
                   children: [
                     const Icon(Icons.chevron_right, size: 16),
                     const SizedBox(width: 7),
-                    Text(horarios, style: const TextStyle(fontSize: 14)),
+                    Text(horarios, style: TextStyle(fontSize: 14, color: color)),
                   ],
                 ),
               ),
