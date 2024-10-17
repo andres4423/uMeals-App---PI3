@@ -92,7 +92,7 @@ class _BusinessCardState extends State<BusinessCard> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    SingleBusinessPage(business: widget.business),
+                    SingleBusinessPage(business: widget.business, color: _dominantColor),
               ));
         },
         child: Container(
@@ -242,7 +242,7 @@ class _BusinessCardState extends State<BusinessCard> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    SingleBusinessPage(business: widget.business),
+                    SingleBusinessPage(business: widget.business, color: _dominantColor),
               ));
         },
         child: Container(

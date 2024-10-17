@@ -4,6 +4,9 @@ import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
 import 'package:umeals/widgets/animatedPaymentCards.dart';
 
 class OrderScreen extends StatefulWidget {
+  const OrderScreen({super.key, required this.color});
+  final Color color;
+
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
@@ -49,8 +52,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Método de entrega',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   SizedBox(height: 20),
                   Center(
                     child: Row(
@@ -58,7 +61,8 @@ class _OrderScreenState extends State<OrderScreen> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
                             child: Container(
                               height: 50,
                               child: ChoiceChip(
@@ -74,7 +78,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     isDeliverySelected = false;
                                   });
                                 },
-                                selectedColor: Colors.green,
+                                selectedColor: widget.color,
                                 backgroundColor: Color(0xFF656565),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -87,7 +91,8 @@ class _OrderScreenState extends State<OrderScreen> {
                         SizedBox(width: 8),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
                             child: Container(
                               height: 50,
                               child: ChoiceChip(
@@ -103,7 +108,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     isDeliverySelected = true;
                                   });
                                 },
-                                selectedColor: Colors.green,
+                                selectedColor: widget.color,
                                 backgroundColor: Color(0xFF656565),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -120,20 +125,23 @@ class _OrderScreenState extends State<OrderScreen> {
                   Text('El vendedor se encuentra en'),
                   SizedBox(height: 10),
                   Container(
-                    height: 200,
-                    child: GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
-                        zoom: 18, // Ajusta el nivel de zoom si es necesario
-                      ),
-                      markers: {
-                        Marker(
-                          markerId: MarkerId('vendedor'),
-                          position: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
-                        ),
-                      },
-                    ),
-                  ),
+                      height: 200,
+                      child:
+                          // GoogleMap(
+                          //   initialCameraPosition: CameraPosition(
+                          //     target: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
+                          //     zoom: 18, // Ajusta el nivel de zoom si es necesario
+                          //   ),
+                          //   markers: {
+                          //     Marker(
+                          //       markerId: MarkerId('vendedor'),
+                          //       position: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
+                          //     ),
+                          //   },
+                          // ),
+                          const Center(
+                        child: Icon(Icons.map, size: 100, color: Colors.red),
+                      )),
                 ],
               ),
             ),
@@ -144,8 +152,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Método de pago',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   AnimatedPaymentCards(),
                 ],
@@ -163,16 +171,16 @@ class _OrderScreenState extends State<OrderScreen> {
                         onPressed: () {
                           // Acción del botón
                         },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          backgroundColor: widget.color,
+                        ),
                         child: Text(
                           'Apartar',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 20.0),
-                          backgroundColor: Color(0xFF174411),
                         ),
                       ),
                     ),
@@ -192,7 +200,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         label: Text(''),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 20.0),
-                          backgroundColor: Color(0xFF174411),
+                          backgroundColor: widget.color,
                         ),
                       ),
                     ),

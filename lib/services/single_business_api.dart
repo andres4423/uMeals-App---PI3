@@ -7,7 +7,8 @@ import 'dart:convert';
 import 'package:umeals/domain/types/product_model.dart';
 
 class SingleBusinessPage extends StatelessWidget {
-  const SingleBusinessPage({super.key, required this.business});
+  const SingleBusinessPage({super.key, required this.business, required this.color});
+  final Color color;
   final BusinessModel business;
 
   Future<List<ProductModel>> fetchProducts() async {
@@ -34,7 +35,7 @@ class SingleBusinessPage extends StatelessWidget {
           print(snapshot.error);
           return const Center(child: Text('Error loading business'));
         } else {
-          return DetailedView(business: business, products: snapshot.data ?? []);
+          return DetailedView(business: business, products: snapshot.data ?? [], color: color);
         }
       },
     );
