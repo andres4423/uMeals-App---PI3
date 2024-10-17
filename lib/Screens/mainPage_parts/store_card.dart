@@ -91,8 +91,8 @@ class _BusinessCardState extends State<BusinessCard> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    SingleBusinessPage(business: widget.business, color: _dominantColor),
+                builder: (context) => SingleBusinessPage(
+                    business: widget.business, color: _dominantColor),
               ));
         },
         child: Container(
@@ -213,13 +213,13 @@ class _BusinessCardState extends State<BusinessCard> {
                           final favoritesApi = FavoritesApi();
                           if (widget.isFavorite) {
                             await favoritesApi.deleteFavorite(
-                            widget.business.idEMPRENDIMIENTOS.toString());
+                                widget.business.idEMPRENDIMIENTOS.toString());
                             setState(() {
                               widget.isFavorite = false;
                             });
                           } else {
                             await favoritesApi.addFavorite(
-                            widget.business.idEMPRENDIMIENTOS.toString());
+                                widget.business.idEMPRENDIMIENTOS.toString());
                             setState(() {
                               widget.isFavorite = true;
                             });
@@ -241,8 +241,8 @@ class _BusinessCardState extends State<BusinessCard> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    SingleBusinessPage(business: widget.business, color: _dominantColor),
+                builder: (context) => SingleBusinessPage(
+                    business: widget.business, color: _dominantColor),
               ));
         },
         child: Container(
@@ -363,12 +363,16 @@ class _BusinessCardState extends State<BusinessCard> {
                           final favoritesApi = FavoritesApi();
                           if (widget.isFavorite) {
                             await favoritesApi.deleteFavorite(
-                            widget.business.idEMPRENDIMIENTOS.toString());
-                            widget.isFavorite = false;
+                                widget.business.idEMPRENDIMIENTOS.toString());
+                            setState(() {
+                              widget.isFavorite = false;
+                            });
                           } else {
                             await favoritesApi.addFavorite(
-                            widget.business.idEMPRENDIMIENTOS.toString());
-                            widget.isFavorite = true;
+                                widget.business.idEMPRENDIMIENTOS.toString());
+                            setState(() {
+                              widget.isFavorite = true;
+                            });
                           }
                         },
                       ),
