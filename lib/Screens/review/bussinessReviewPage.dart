@@ -15,13 +15,7 @@ class BusinessReviewPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-        ),
-        // title: Text(
-        //   'ArteySano',
-        //   style: TextStyle(color: Colors.black),
-        // ),
-        // centerTitle: true,
-        // elevation: 0,
+        )
       ),
       body: ListView(
         children: [
@@ -60,7 +54,7 @@ class BusinessReviewPage extends StatelessWidget {
           // Lista de reseñas
           ReviewItem(
             userImage: 'assets/user1.png',
-            userName: 'Natalia Mejía',
+            userName: 'Andres Olaya',
             rating: 4.5,
             comment:
                 'Muy ricos, se nota que las salsas las hacen ellos mismos <3',
