@@ -5,6 +5,7 @@ import 'package:umeals/Screens/orden_pedido/checkout.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
+import 'package:umeals/Screens/pagina_principal.dart';
 import 'package:umeals/widgets/splashScreen.dart'; 
 
 final AppRouter = GoRouter(
@@ -13,7 +14,7 @@ final AppRouter = GoRouter(
     // Ruta para el splash screen
     GoRoute(
       path: '/',
-      builder: (context, state) => SplashScreen(), 
+      builder: (context, state) => PaginaPrincipal(), 
     ),
 
     GoRoute(

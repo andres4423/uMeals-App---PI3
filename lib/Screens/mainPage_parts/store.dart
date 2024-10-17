@@ -284,22 +284,29 @@ class InformationTab extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child:
-                              const Icon(Icons.payments, color: Colors.black),
-                        ),
-                        const SizedBox(width: 10),
-                        const Text('Efectivo, Transferencia'),
-                      ],
-                    ),
+                  Row(
+  mainAxisAlignment: MainAxisAlignment.start,
+  children: [
+    Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade300,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Icon(Icons.payments, color: Colors.black),
+    ),
+    const SizedBox(width: 10),
+    Flexible( 
+      child: Text(
+        'Efectivo, Transferencia', 
+        style: const TextStyle(
+          fontSize: 16,
+        ),
+        overflow: TextOverflow.ellipsis, 
+      ),
+    ),
+  ],
+),
                   ],
                 ),
               ),
