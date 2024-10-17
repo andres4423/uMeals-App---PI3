@@ -1,4 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:umeals/Screens/login_register/login.dart';
 import 'package:umeals/Screens/orden_pedido/checkout.dart';
@@ -19,7 +20,7 @@ final AppRouter = GoRouter(
 
     GoRoute(
       path: '/orden',
-      builder: (context, state) => OrderScreen(),
+      builder: (context, state) => OrderScreen(color: Colors.white),
     ),
     
     GoRoute(

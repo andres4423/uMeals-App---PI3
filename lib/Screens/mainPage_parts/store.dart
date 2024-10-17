@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:umeals/Screens/mainPage_parts/product_box.dart';
+import 'package:umeals/Screens/orden_pedido/checkout.dart';
 import 'package:umeals/Screens/review/bussinessReviewPage.dart';
 import 'package:umeals/domain/types/business_model.dart';
 import 'package:umeals/domain/types/product_model.dart';
 
 class DetailedView extends StatefulWidget {
   const DetailedView(
-      {super.key, required this.business, required this.products});
+      {super.key,
+      required this.business,
+      required this.products,
+      required this.color});
   final List<ProductModel> products;
   final BusinessModel business;
+  final Color color;
 
   @override
   State<DetailedView> createState() => _DetailedViewState();
@@ -41,11 +48,11 @@ class _DetailedViewState extends State<DetailedView> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [Colors.blue, Colors.transparent],
+                          colors: [widget.color, Colors.transparent],
                         ),
                       ),
                     ),
@@ -147,10 +154,10 @@ class _DetailedViewState extends State<DetailedView> {
               ),
             ),
             // Barra de pestañas
-            const TabBar(
+            TabBar(
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
-              indicatorColor: Colors.green,
+              indicatorColor: widget.color,
               tabs: [
                 Tab(text: 'Información'),
                 Tab(text: 'Productos'),
@@ -161,9 +168,10 @@ class _DetailedViewState extends State<DetailedView> {
               child: TabBarView(
                 children: [
                   // Primera pestaña: Información
-                  InformationTab(business: widget.business),
+                  InformationTab(
+                      business: widget.business, color: widget.color),
                   // Segunda pestaña: Productos
-                  ProductTab(products: widget.products),
+                  ProductTab(products: widget.products, color: widget.color),
                 ],
               ),
             ),
@@ -175,7 +183,9 @@ class _DetailedViewState extends State<DetailedView> {
 }
 
 class InformationTab extends StatelessWidget {
-  const InformationTab({super.key, required this.business});
+  const InformationTab(
+      {super.key, required this.business, required this.color});
+  final Color color;
   final BusinessModel business;
 
   @override
@@ -201,7 +211,7 @@ class InformationTab extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.green.shade800,
+                color: color,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
@@ -233,16 +243,30 @@ class InformationTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.map, size: 100, color: Colors.red),
-                      ),
-                    ),
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child:
+                            // GoogleMap(
+                            //   initialCameraPosition: CameraPosition(
+                            //     target: LatLng(7.0375758,
+                            //         -73.0705219),
+                            //     zoom: 18,
+                            //   ),
+                            //   markers: {
+                            //     Marker(
+                            //       markerId: MarkerId('vendedor'),
+                            //       position: LatLng(7.0375758,
+                            //           -73.0705219),
+                            //     ),
+                            //   },
+                            // ),
+                            const Center(
+                          child: Icon(Icons.map, size: 100, color: Colors.red),
+                        )),
                   ],
                 ),
               ),
@@ -260,20 +284,35 @@ class InformationTab extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10),
+                    Container(
+                      margin: EdgeInsets.only(right: 25),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color:
+                            Color(0xFF1E252B), // Set background color to 1E252B
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Icon(Icons.phone,
+                                color: Colors.blue, size: 30),
                           ),
-                          child: const Icon(Icons.phone, color: Colors.white),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(business.contacto.toString()),
-                      ],
+                          const SizedBox(width: 10),
+                          Text(
+                            business.contacto.toString(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 20),
                     const Text(
@@ -284,29 +323,63 @@ class InformationTab extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                  Row(
-  mainAxisAlignment: MainAxisAlignment.start,
-  children: [
-    Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: const Icon(Icons.payments, color: Colors.black),
-    ),
-    const SizedBox(width: 10),
-    Flexible( 
-      child: Text(
-        'Efectivo, Transferencia', 
-        style: const TextStyle(
-          fontSize: 16,
-        ),
-        overflow: TextOverflow.ellipsis, 
-      ),
-    ),
-  ],
-),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: color,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Image.asset(
+                                'assets/nequi.png',
+                                width: 35,
+                                height: 35,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: color,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Image.asset(
+                                'assets/bancolombia.png',
+                                width: 35,
+                                height: 35,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: color,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Image.asset(
+                                'assets/cash.png',
+                                width: 35,
+                                height: 35,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 10),
+                        // Flexible(
+                        //   child: Text(
+                        //     'Efectivo, Transferencia',
+                        //     style: TextStyle(fontSize: 14),
+                        //     overflow: TextOverflow.ellipsis,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+
                   ],
                 ),
               ),
@@ -329,7 +402,14 @@ class InformationTab extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: business.horarios.toJson().length,
                 itemBuilder: (context, index) {
-                  final dia = business.horarios.toJson().keys.elementAt(index);
+                  final List<String> diasOrdenados = [
+                    'lunes',
+                    'martes',
+                    'miércoles',
+                    'jueves',
+                    'viernes'
+                  ];
+                  final dia = diasOrdenados[index];
                   final horarios =
                       business.horarios.toJson().values.elementAt(index);
                   return horarioBox(dia, horarios);
@@ -340,7 +420,7 @@ class InformationTab extends StatelessWidget {
     );
   }
 
-  Widget horarioBox(String dia, String horarios) {
+  Widget horarioBox(String dia, String horarios, {Color? color}) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(8),
@@ -355,10 +435,10 @@ class InformationTab extends StatelessWidget {
         children: [
           Text(
             dia,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: color,
             ),
           ),
           const SizedBox(height: 5),
@@ -371,7 +451,7 @@ class InformationTab extends StatelessWidget {
                   children: [
                     const Icon(Icons.chevron_right, size: 16),
                     const SizedBox(width: 7),
-                    Text(horarios, style: const TextStyle(fontSize: 14)),
+                    Text(horarios, style: TextStyle(fontSize: 14, color: color)),
                   ],
                 ),
               ),
@@ -384,8 +464,9 @@ class InformationTab extends StatelessWidget {
 }
 
 class ProductTab extends StatelessWidget {
-  const ProductTab({super.key, required this.products});
+  const ProductTab({super.key, required this.products, required this.color});
   final List<ProductModel> products;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -412,85 +493,32 @@ class ProductTab extends StatelessWidget {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     final product = products[index];
-                    return productBox(product);
+                    return ProductBox(product: product);
                   },
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget productBox(ProductModel product) {
-    return Container(
-      margin: const EdgeInsets.only(right: 16),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            elevation: 5,
-            child: Container(
-              width: 180,
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.purple.shade200,
-                    backgroundImage: NetworkImage(product.imgURL),
-                  ),
-                  const SizedBox(height: 10),
-                    Text(
-                    product.nombre,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.brown,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    ),
-                  const SizedBox(height: 5),
-                  Text(
-                    '\$${product.precio.toString().replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}', 
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.brown,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.remove),
-                      ),
-                      const Text(
-                        '0',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "¡Quedan ${product.cantidad}!",
-                    style: const TextStyle(color: Colors.green),
-                  ),
-                ],
               ),
-            ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderScreen(color: color),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: color,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: const Text(
+                  'Realizar Orden',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            ],
           ),
         ],
       ),
