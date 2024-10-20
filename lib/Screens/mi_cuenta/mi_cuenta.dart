@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
 import 'package:umeals/Screens/mi_cuenta/ayuda.dart';
 import 'package:umeals/Screens/mi_cuenta/editar.dart';
 import 'package:umeals/Screens/mi_cuenta/settings.dart';
@@ -57,63 +60,66 @@ Future<void> _fetchUserInfo() async {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: screenSize.width * 0.24,
-                  height: screenSize.width * 0.25,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [Colors.pink, Colors.purple],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      width: screenSize.width * 0.25,
-                      height: screenSize.width * 0.215,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/cachi.jpeg'),
-                      ),
-                    ),
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Container(
+      width: screenSize.width * 0.24,
+      height: screenSize.width * 0.25,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          colors: [Colors.pink, Colors.purple],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Container(
+          width: screenSize.width * 0.25,
+          height: screenSize.width * 0.215,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+          ),
+          child: CircleAvatar(
+            backgroundImage: _user?.imageURL != null
+              ? MemoryImage(
+                  base64Decode(_user!.imageURL!.replaceFirst('data:image/png;base64,', ''))
+                )
+              : const NetworkImage('https://cdn.icon-icons.com/icons2/1919/PNG/512/avatarinsideacircle_122011.png'), // Imagen por defecto
+          ),
+        ),
+      ),
+    ),
+    const SizedBox(width: 16),
+    Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Hola",
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(height: 8),
+          _isLoading
+              ? const CircularProgressIndicator()  
+              : Text(
+                  _user?.nombre ?? 'Usuario', 
+                  style: TextStyle(
+                    fontSize: screenSize.width * 0.048,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Hola",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      const SizedBox(height: 8),
-                     
-                      _isLoading
-                          ? const CircularProgressIndicator()  
-                          : Text(
-                              _user?.nombre ?? 'Usuario', 
-                              style: TextStyle(
-                                fontSize: screenSize.width * 0.048,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 5),
-                Image.asset(
-                  'assets/mano.jpeg',
-                  width: screenSize.width * 0.4,
-                ),
-              ],
-            ),
+        ],
+      ),
+    ),
+    const SizedBox(width: 5),
+    Image.asset(
+      'assets/mano.jpeg',
+      width: screenSize.width * 0.4,
+    ),
+  ],
+),
             const SizedBox(height: 40),
             ListTile(
               leading: const Icon(Icons.edit, size: 25,),
@@ -127,13 +133,13 @@ Future<void> _fetchUserInfo() async {
               },
             ),
             const SizedBox(height: 10),
-            ListTile(
-              leading: const Icon(Icons.message, size: 25,),
-              title:  Text('Enviar mensaje',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
-            ),
-            const SizedBox(height: 10),
+            // ListTile(
+            //   leading: const Icon(Icons.message, size: 25,),
+            //   title:  Text('Enviar mensaje',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
+            //   trailing: const Icon(Icons.arrow_forward_ios),
+            //   onTap: () {},
+            // ),
+            // const SizedBox(height: 10),
             ListTile(
               leading: const Icon(Icons.settings, size: 25,),
               title:  Text('Configuración',style: TextStyle(fontSize:screenSize.width * 0.045 ),),
@@ -141,7 +147,7 @@ Future<void> _fetchUserInfo() async {
               onTap: () {
                  Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Settings_View()),
+                  MaterialPageRoute(builder: (context) =>  Settings_View(user: _user!,)),
                 );
               },
             ),
@@ -190,6 +196,7 @@ Future<void> _fetchUserInfo() async {
           ],
         ),
       ),
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }

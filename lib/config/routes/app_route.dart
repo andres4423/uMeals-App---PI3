@@ -15,7 +15,7 @@ final AppRouter = GoRouter(
     // Ruta para el splash screen
     GoRoute(
       path: '/',
-      builder: (context, state) => PaginaPrincipal(), 
+      builder: (context, state) => LoginScreen(), 
     ),
 
     GoRoute(
@@ -42,12 +42,7 @@ final AppRouter = GoRouter(
       },
     ),
 
-    GoRoute(
-      path: '/settings',
-      builder: (context, state) {
-        return const Settings_View();
-      },
-    ),
+  
     
   ],
 );

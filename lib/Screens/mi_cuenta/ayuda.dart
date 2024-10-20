@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
 import 'package:umeals/Screens/mi_cuenta/editar.dart';
 
 class AyudaView extends StatelessWidget {
@@ -97,6 +98,7 @@ class AyudaView extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }

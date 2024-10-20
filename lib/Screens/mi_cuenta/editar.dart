@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:image_picker/image_picker.dart';
+import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
+import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
 import 'package:umeals/domain/types/user_model.dart';
 import 'package:umeals/services/update_service.dart';
-
 
 class Editar_cuenta extends StatefulWidget {
   final User user;
@@ -28,7 +30,8 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     super.initState();
     nombreController = TextEditingController(text: widget.user.nombre);
     apellidosController = TextEditingController(text: widget.user.apellidos);
-    telefonoController = TextEditingController(text: widget.user.telefono.toString());
+    telefonoController =
+        TextEditingController(text: widget.user.telefono.toString());
     correoController = TextEditingController(text: widget.user.correo);
     passController = TextEditingController(text: widget.user.password);
   }
@@ -46,6 +49,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     );
   }
 
+//! parte de la imagen
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
@@ -64,19 +68,37 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
       showEditButton = nombreController.text != widget.user.nombre ||
           apellidosController.text != widget.user.apellidos ||
           telefonoController.text != widget.user.telefono.toString() ||
-          passController.text != widget.user.password;
+          passController.text != widget.user.password ||
+          _imageFile != null;
     });
   }
 
   Future<void> _editUserInformation() async {
     final updateUserService = UpdateUser();
+
+    String? base64Image;
+    if (_imageFile != null) {
+      final bytes = await _imageFile!.readAsBytes();
+      base64Image = base64Encode(bytes);
+    }
+
+    int? telefono;
+    try {
+      telefono = int.parse(telefonoController.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('El número de teléfono no es válido')),
+      );
+      return;
+    }
+
     final updatedUser = User(
       nombre: nombreController.text,
       apellidos: apellidosController.text,
-      telefono: int.parse(telefonoController.text),
+      telefono: telefono,
       correo: correoController.text,
       password: passController.text,
-      imageURL: _imageFile?.path, 
+      imageURL: base64Image,
     );
 
     final success = await updateUserService.updateUserInfo(updatedUser);
@@ -85,15 +107,15 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Información actualizada con éxito')),
       );
-
-     
       setState(() {
         widget.user.nombre = updatedUser.nombre;
         widget.user.apellidos = updatedUser.apellidos;
         widget.user.telefono = updatedUser.telefono;
         widget.user.correo = updatedUser.correo;
         widget.user.password = updatedUser.password;
-       
+        if (_imageFile != null) {
+          widget.user.imageURL = base64Image;
+        }
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -102,8 +124,10 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
     }
   }
 
+//! app
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
     final double avatarSize2 = size.width * 0.23;
     final double textFieldFontSize = size.width * 0.042;
@@ -118,7 +142,10 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
             size: iconSize,
           ),
           onPressed: () {
-            context.pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MiCuenta()),
+            );
           },
         ),
         backgroundColor: Colors.transparent,
@@ -144,10 +171,17 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         color: Colors.white,
                       ),
                       child: CircleAvatar(
-                        backgroundImage: _imageFile != null
-                            ? FileImage(_imageFile!)
-                            : AssetImage('assets/cachi.jpeg') as ImageProvider,
-                      ),
+      backgroundImage: _imageFile != null
+          ? FileImage(_imageFile!)
+          : (widget.user.imageURL != null && widget.user.imageURL!.isNotEmpty
+              ? MemoryImage(
+                  base64Decode(widget.user.imageURL!.replaceFirst('data:image/png;base64,', ''))
+                )
+              : NetworkImage(
+                  'https://cdn.icon-icons.com/icons2/1919/PNG/512/avatarinsideacircle_122011.png',
+                ) as ImageProvider),
+    ),
+
                     ),
                   ),
                 ),
@@ -173,7 +207,8 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
             SizedBox(height: 30),
             Text(
               "Información Personal",
-              style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: labelFontSize, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 40),
 
@@ -197,10 +232,12 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
               controller: telefonoController,
               keyboardType: TextInputType.phone,
               onChanged: (value) => _checkForChanges(),
-              decoration: _buildInputDecoration('Teléfono', textFieldFontSize).copyWith(
+              decoration:
+                  _buildInputDecoration('Teléfono', textFieldFontSize).copyWith(
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text('🇨🇴 +57', style: TextStyle(fontSize: textFieldFontSize)),
+                  child: Text('🇨🇴 +57',
+                      style: TextStyle(fontSize: textFieldFontSize)),
                 ),
               ),
               style: TextStyle(fontSize: textFieldFontSize),
@@ -209,13 +246,15 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
 
             Text(
               "Seguridad y Cuenta",
-              style: TextStyle(fontSize: labelFontSize, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: labelFontSize, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 25),
 
             TextFormField(
               controller: passController,
-              decoration: _buildInputDecoration('Contraseña', textFieldFontSize),
+              decoration:
+                  _buildInputDecoration('Contraseña', textFieldFontSize),
               obscureText: true,
               style: TextStyle(fontSize: textFieldFontSize),
               onChanged: (value) => _checkForChanges(),
@@ -249,7 +288,9 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                         SizedBox(width: 10),
                         Text(
                           "Editar información",
-                          style: TextStyle(fontSize: textFieldFontSize, color: Colors.purple),
+                          style: TextStyle(
+                              fontSize: textFieldFontSize,
+                              color: Colors.purple),
                         ),
                       ],
                     ),
@@ -281,7 +322,8 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
                     SizedBox(width: 10),
                     Text(
                       "Eliminar Cuenta",
-                      style: TextStyle(fontSize: textFieldFontSize, color: Colors.red),
+                      style: TextStyle(
+                          fontSize: textFieldFontSize, color: Colors.red),
                     ),
                   ],
                 ),
@@ -290,6 +332,7 @@ class _Editar_cuentaState extends State<Editar_cuenta> {
           ],
         ),
       ),
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }

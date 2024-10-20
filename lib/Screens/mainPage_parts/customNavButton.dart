@@ -1,9 +1,38 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:umeals/Screens/mi_cuenta/mi_cuenta.dart';
+import 'package:umeals/Screens/mi_cuenta/settings.dart';
+import 'package:umeals/Screens/pagina_principal.dart';
+import 'package:umeals/domain/types/user_model.dart';
+import 'package:umeals/services/cuenta_service.dart';
 
-class Customnavbutton extends StatelessWidget {
+class Customnavbutton extends StatefulWidget {
   const Customnavbutton({super.key});
 
+  @override
+  State<Customnavbutton> createState() => _CustomnavbuttonState();
+}
+
+class _CustomnavbuttonState extends State<Customnavbutton> {
+    User? _user;  
+      @override
+  void initState() {
+    super.initState();
+    _fetchUserInfo(); 
+  }
+
+Future<void> _fetchUserInfo() async {
+  UserInfoService userInfoService = UserInfoService();
+  User? user = await userInfoService.fetchUserInfo();
+ setState(() {
+    _user = user;  
+   
+  });
+}
+
+
+  
   @override
   Widget build(BuildContext context) {
 
@@ -15,11 +44,11 @@ class Customnavbutton extends StatelessWidget {
         break;
         case 1:
          Navigator.push(context, 
-        MaterialPageRoute(builder: (context) => const MiCuenta()));  
+        MaterialPageRoute(builder: (context) => const PaginaPrincipal()));  
         break;
         case 2:
          Navigator.push(context, 
-        MaterialPageRoute(builder: (context) => const MiCuenta()));  
+        MaterialPageRoute(builder: (context) =>  Settings_View(user: _user!,)));  
         break;
     }
   }
@@ -46,21 +75,23 @@ class Customnavbutton extends StatelessWidget {
 
 
 
-        items:const [
+        items: [
             BottomNavigationBarItem(icon: CircleAvatar(
-              radius: 14,
-              backgroundImage: NetworkImage('https://cdn.icon-icons.com/icons2/1919/PNG/512/avatarinsideacircle_122011.png'),
-              
-            ),
+            backgroundImage: _user?.imageURL != null
+              ? MemoryImage(
+                  base64Decode(_user!.imageURL!.replaceFirst('data:image/png;base64,', ''))
+                )
+              : const NetworkImage('https://cdn.icon-icons.com/icons2/1919/PNG/512/avatarinsideacircle_122011.png'), // Imagen por defecto
+          ),
             label: 'Profile',
             
 
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.message_outlined, 
-                color: Colors.black45,)
-                , label: '',),
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     Icons.message_outlined, 
+            //     color: Colors.black45,)
+            //     , label: '',),
             BottomNavigationBarItem(icon: Icon(Icons.home_outlined, color: Colors.black45), label: 'home'),
             // BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined, color: Colors.black45), label: 'carrito_compras'),
             BottomNavigationBarItem(icon: Icon(Icons.settings, color: Colors.black45), label: 'settings'),

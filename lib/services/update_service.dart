@@ -19,6 +19,7 @@ Future<bool> updateUserInfo(User user) async {
         'Apellidos': user.apellidos,
         'telefono': user.telefono,
         'imageURL': user.imageURL,
+        'password' : user.password
       };
 
       final response = await http.put(

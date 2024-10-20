@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
 import 'package:umeals/Screens/mainPage_parts/product_box.dart';
 import 'package:umeals/Screens/orden_pedido/checkout.dart';
 import 'package:umeals/Screens/review/bussinessReviewPage.dart';
@@ -23,161 +24,164 @@ class DetailedView extends StatefulWidget {
 class _DetailedViewState extends State<DetailedView> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              height: 310,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(widget.business.portadaImgURL),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.5),
-                    BlendMode.darken,
+    return Scaffold(
+      body: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          body: Column(
+            children: [
+              Container(
+                height: 310,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.business.portadaImgURL),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
                   ),
                 ),
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [widget.color, Colors.transparent],
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [widget.color, Colors.transparent],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // Iconos y texto del banner
-                  Positioned(
-                    top: 30,
-                    left: 16,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    // Iconos y texto del banner
+                    Positioned(
+                      top: 30,
+                      left: 16,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 30,
-                    right: 16,
-                    child: Row(
-                      children: [
-                        const Icon(Icons.compass_calibration_rounded,
-                            color: Colors.white),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.favorite_border,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 80,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    Positioned(
+                      top: 30,
+                      right: 16,
+                      child: Row(
                         children: [
-                          CircleAvatar(
-                            radius: 45,
-                            backgroundImage:
-                                NetworkImage(widget.business.logotipoImgUrl),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            widget.business.nombre,
-                            style: const TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                icon: const Icon(Icons.star,
-                                    color: Colors.yellow),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BusinessReviewPage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              // const SizedBox(width: 5),
-                              Text(
-                                widget.business.calificacion.toString(),
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(width: 10),
-                              const Icon(Icons.motorcycle, color: Colors.white),
-                              const SizedBox(width: 5),
-                              const Text(
-                                'Gratis',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Icons.location_on, color: Colors.white),
-                              SizedBox(width: 5),
-                              Text(
-                                'Mesas del G',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                          const Icon(Icons.compass_calibration_rounded,
+                              color: Colors.white),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.favorite_border,
+                                color: Colors.white),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 80,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 45,
+                              backgroundImage:
+                                  NetworkImage(widget.business.logotipoImgUrl),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              widget.business.nombre,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: const Icon(Icons.star,
+                                      color: Colors.yellow),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BusinessReviewPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                // const SizedBox(width: 5),
+                                Text(
+                                  widget.business.calificacion.toString(),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                const SizedBox(width: 10),
+                                const Icon(Icons.motorcycle, color: Colors.white),
+                                const SizedBox(width: 5),
+                                const Text(
+                                  'Gratis',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(Icons.location_on, color: Colors.white),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Mesas del G',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Barra de pestañas
+              TabBar(
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: widget.color,
+                tabs: [
+                  Tab(text: 'Información'),
+                  Tab(text: 'Productos'),
                 ],
               ),
-            ),
-            // Barra de pestañas
-            TabBar(
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: widget.color,
-              tabs: [
-                Tab(text: 'Información'),
-                Tab(text: 'Productos'),
-              ],
-            ),
-            // Vistas correspondientes a las pestañas
-            Expanded(
-              child: TabBarView(
-                children: [
-                  // Primera pestaña: Información
-                  InformationTab(
-                      business: widget.business, color: widget.color),
-                  // Segunda pestaña: Productos
-                  ProductTab(products: widget.products, color: widget.color),
-                ],
+              // Vistas correspondientes a las pestañas
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    // Primera pestaña: Información
+                    InformationTab(
+                        business: widget.business, color: widget.color),
+                    // Segunda pestaña: Productos
+                    ProductTab(products: widget.products, color: widget.color),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }
@@ -523,5 +527,6 @@ class ProductTab extends StatelessWidget {
         ],
       ),
     );
+    
   }
 }

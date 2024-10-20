@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:umeals/Screens/mainPage_parts/customNavButton.dart';
+import 'package:umeals/domain/types/user_model.dart';
 
 class Settings_View extends StatefulWidget {
-  const Settings_View({super.key});
+  final User user;
+  const Settings_View({super.key, required this.user});
 
   @override
   State<Settings_View> createState() => _Settings_ViewState();
@@ -81,9 +86,13 @@ class _Settings_ViewState extends State<Settings_View> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/cachi.jpeg'),
-                      ),
+                      child: CircleAvatar(
+                   backgroundImage: widget.user.imageURL != null
+              ? MemoryImage(
+                  base64Decode(widget.user!.imageURL!.replaceFirst('data:image/png;base64,', ''))
+                )
+              : const NetworkImage('https://cdn.icon-icons.com/icons2/1919/PNG/512/avatarinsideacircle_122011.png'), // Imagen por defecto
+          ),
                     ),
                   ),
                 ),
@@ -91,8 +100,8 @@ class _Settings_ViewState extends State<Settings_View> {
                 Expanded(
                   child: Column(
                     children: [
-                      Text("Nombre del usuario", style: TextStyle(fontSize:size.width * 0.05 ),),
-                      Text("Correo del usuario", style: TextStyle(fontSize:size.width * 0.045 ),)
+                      Text(widget.user.nombre, style: TextStyle(fontSize:size.width * 0.05 ),),
+                      Text(widget.user.correo, style: TextStyle(fontSize:size.width * 0.045 ),)
                     ],
                   )
                 ),
@@ -216,6 +225,7 @@ class _Settings_ViewState extends State<Settings_View> {
           ],
         ),
       ),
+      bottomNavigationBar: Customnavbutton(),
     );
   }
 }
