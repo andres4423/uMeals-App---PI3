@@ -169,7 +169,47 @@ class _OrderScreenState extends State<OrderScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          // Acción del botón
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                title: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle,
+                                      color: Colors.green,
+                                      size: 60.0,
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      'Orden creada!',
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                      Navigator.of(context)
+                                          .pop(); // Go back to the previous screen
+                                      Navigator.of(context)
+                                          .pop(); // Navigate to the homepage
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 20.0),
