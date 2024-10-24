@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:umeals/config/routes/app_route.dart';
 
-
-
 void main() {
   runApp(const MainApp());
 }

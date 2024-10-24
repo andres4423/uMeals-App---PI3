@@ -9,6 +9,12 @@
         android:label="umeals"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCWWZtiOTGoS7hgcio7r0mLEmjTFX7BCqU" />
+
+            
         <activity
             android:name=".MainActivity"
             android:exported="true"

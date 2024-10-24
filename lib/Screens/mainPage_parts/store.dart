@@ -254,23 +254,24 @@ class InformationTab extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child:
-                            // GoogleMap(
-                            //   initialCameraPosition: CameraPosition(
-                            //     target: LatLng(7.0375758,
-                            //         -73.0705219),
-                            //     zoom: 18,
-                            //   ),
-                            //   markers: {
-                            //     Marker(
-                            //       markerId: MarkerId('vendedor'),
-                            //       position: LatLng(7.0375758,
-                            //           -73.0705219),
-                            //     ),
-                            //   },
-                            // ),
-                            const Center(
-                          child: Icon(Icons.map, size: 100, color: Colors.red),
-                        )),
+                            GoogleMap(
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(7.0375758,
+                                    -73.0705219),
+                                zoom: 18,
+                              ),
+                              markers: {
+                                Marker(
+                                  markerId: MarkerId('vendedor'),
+                                  position: LatLng(7.0375758,
+                                      -73.0705219),
+                                ),
+                              },
+                            ),
+                        //     const Center(
+                        //   child: Icon(Icons.map, size: 100, color: Colors.red),
+                        // )
+                        ),
                   ],
                 ),
               ),

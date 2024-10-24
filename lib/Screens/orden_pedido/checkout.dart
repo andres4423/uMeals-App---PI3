@@ -127,21 +127,22 @@ class _OrderScreenState extends State<OrderScreen> {
                   Container(
                       height: 200,
                       child:
-                          // GoogleMap(
-                          //   initialCameraPosition: CameraPosition(
-                          //     target: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
-                          //     zoom: 18, // Ajusta el nivel de zoom si es necesario
-                          //   ),
-                          //   markers: {
-                          //     Marker(
-                          //       markerId: MarkerId('vendedor'),
-                          //       position: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
-                          //     ),
-                          //   },
-                          // ),
-                          const Center(
-                        child: Icon(Icons.map, size: 100, color: Colors.red),
-                      )),
+                          GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
+                              zoom: 18, // Ajusta el nivel de zoom si es necesario
+                            ),
+                            markers: {
+                              Marker(
+                                markerId: MarkerId('vendedor'),
+                                position: LatLng(7.0375758, -73.0705219), // Coordenadas actualizadas
+                              ),
+                            },
+                          ),
+                      //     const Center(
+                      //   child: Icon(Icons.map, size: 100, color: Colors.red),
+                      // )
+                      ),
                 ],
               ),
             ),
